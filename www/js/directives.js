@@ -1,7 +1,7 @@
 directiveModule
   .directive('jyNavigation', function() {
     return {
-      templateUrl: 'jurnywebapp/Shared/Navigation/navigation.html',
+      templateUrl: 'jurnywebapp/Shared/Navigation/Navigation.html',
       controller: 'navigationCtrl'
     };
   })
