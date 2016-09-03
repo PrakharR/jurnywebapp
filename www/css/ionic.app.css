@@ -10226,19 +10226,25 @@ md-input-container {
     width: 200px;
     height: 45px;
     margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    -webkit-transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
   .login-card .login-btn.facebook {
-    background-color: #3c5c99; }
+    background-color: #3c5c99;
+    opacity: 0.95; }
     .login-card .login-btn.facebook span {
       color: #fff; }
+  .login-card .login-btn.facebook:hover {
+    background-color: #3c5c99;
+    opacity: 1; }
   .login-card .login-btn.google {
-    background-color: #d73d32; }
+    background-color: #d73d32;
+    opacity: 0.95; }
     .login-card .login-btn.google span {
       color: #fff; }
-  .login-card .login-btn.jurny {
-    background-color: #4caf50; }
-    .login-card .login-btn.jurny span {
-      color: #fff; }
+  .login-card .login-btn.google:hover {
+    background-color: #d73d32;
+    opacity: 1; }
   .login-card .signup-subhead {
     margin-bottom: 8px; }
   .login-card .signup-form {

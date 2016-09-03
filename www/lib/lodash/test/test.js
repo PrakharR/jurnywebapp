@@ -104,12 +104,24 @@
       stubObject = function() { return {}; },
       stubString = function() { return ''; };
 
-  /** List of latin-1 supplementary letters to basic latin letters. */
+
+
+  /** List of Latin Unicode letters. */
   var burredLetters = [
-    '\xc0', '\xc1', '\xc2', '\xc3', '\xc4', '\xc5', '\xc6', '\xc7', '\xc8', '\xc9', '\xca', '\xcb', '\xcc', '\xcd', '\xce',
-    '\xcf', '\xd0', '\xd1', '\xd2', '\xd3', '\xd4', '\xd5', '\xd6', '\xd8', '\xd9', '\xda', '\xdb', '\xdc', '\xdd', '\xde',
-    '\xdf', '\xe0', '\xe1', '\xe2', '\xe3', '\xe4', '\xe5', '\xe6', '\xe7', '\xe8', '\xe9', '\xea', '\xeb', '\xec', '\xed', '\xee',
-    '\xef', '\xf0', '\xf1', '\xf2', '\xf3', '\xf4', '\xf5', '\xf6', '\xf8', '\xf9', '\xfa', '\xfb', '\xfc', '\xfd', '\xfe', '\xff'
+    // Latin-1 Supplement letters.
+    '\xc0', '\xc1', '\xc2', '\xc3', '\xc4', '\xc5', '\xc6', '\xc7', '\xc8', '\xc9', '\xca', '\xcb', '\xcc', '\xcd', '\xce', '\xcf',
+    '\xd0', '\xd1', '\xd2', '\xd3', '\xd4', '\xd5', '\xd6',         '\xd8', '\xd9', '\xda', '\xdb', '\xdc', '\xdd', '\xde', '\xdf',
+    '\xe0', '\xe1', '\xe2', '\xe3', '\xe4', '\xe5', '\xe6', '\xe7', '\xe8', '\xe9', '\xea', '\xeb', '\xec', '\xed', '\xee', '\xef',
+    '\xf0', '\xf1', '\xf2', '\xf3', '\xf4', '\xf5', '\xf6',         '\xf8', '\xf9', '\xfa', '\xfb', '\xfc', '\xfd', '\xfe', '\xff',
+    // Latin Extended-A letters.
+    '\u0100', '\u0101', '\u0102', '\u0103', '\u0104', '\u0105', '\u0106', '\u0107', '\u0108', '\u0109', '\u010a', '\u010b', '\u010c', '\u010d', '\u010e', '\u010f',
+    '\u0110', '\u0111', '\u0112', '\u0113', '\u0114', '\u0115', '\u0116', '\u0117', '\u0118', '\u0119', '\u011a', '\u011b', '\u011c', '\u011d', '\u011e', '\u011f',
+    '\u0120', '\u0121', '\u0122', '\u0123', '\u0124', '\u0125', '\u0126', '\u0127', '\u0128', '\u0129', '\u012a', '\u012b', '\u012c', '\u012d', '\u012e', '\u012f',
+    '\u0130', '\u0131', '\u0132', '\u0133', '\u0134', '\u0135', '\u0136', '\u0137', '\u0138', '\u0139', '\u013a', '\u013b', '\u013c', '\u013d', '\u013e', '\u013f',
+    '\u0140', '\u0141', '\u0142', '\u0143', '\u0144', '\u0145', '\u0146', '\u0147', '\u0148', '\u0149', '\u014a', '\u014b', '\u014c', '\u014d', '\u014e', '\u014f',
+    '\u0150', '\u0151', '\u0152', '\u0153', '\u0154', '\u0155', '\u0156', '\u0157', '\u0158', '\u0159', '\u015a', '\u015b', '\u015c', '\u015d', '\u015e', '\u015f',
+    '\u0160', '\u0161', '\u0162', '\u0163', '\u0164', '\u0165', '\u0166', '\u0167', '\u0168', '\u0169', '\u016a', '\u016b', '\u016c', '\u016d', '\u016e', '\u016f',
+    '\u0170', '\u0171', '\u0172', '\u0173', '\u0174', '\u0175', '\u0176', '\u0177', '\u0178', '\u0179', '\u017a', '\u017b', '\u017c', '\u017d', '\u017e', '\u017f'
   ];
 
   /** List of combining diacritical marks. */
@@ -124,12 +136,25 @@
     '\ufe20', '\ufe21', '\ufe22', '\ufe23'
   ];
 
-  /** List of `burredLetters` translated to basic latin letters. */
+  /** List of converted Latin Unicode letters. */
   var deburredLetters = [
+    // Converted Latin-1 Supplement letters.
     'A',  'A', 'A', 'A', 'A', 'A', 'Ae', 'C',  'E', 'E', 'E', 'E', 'I', 'I', 'I',
     'I',  'D', 'N', 'O', 'O', 'O', 'O',  'O',  'O', 'U', 'U', 'U', 'U', 'Y', 'Th',
     'ss', 'a', 'a', 'a', 'a', 'a', 'a',  'ae', 'c', 'e', 'e', 'e', 'e', 'i', 'i',  'i',
-    'i',  'd', 'n', 'o', 'o', 'o', 'o',  'o',  'o', 'u', 'u', 'u', 'u', 'y', 'th', 'y'
+    'i',  'd', 'n', 'o', 'o', 'o', 'o',  'o',  'o', 'u', 'u', 'u', 'u', 'y', 'th', 'y',
+    // Converted Latin Extended-A letters.
+    'A', 'a', 'A', 'a', 'A', 'a', 'C', 'c', 'C', 'c', 'C', 'c', 'C', 'c',
+    'D', 'd', 'D', 'd', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e',
+    'G', 'g', 'G', 'g', 'G', 'g', 'G', 'g', 'H', 'h', 'H', 'h',
+    'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'IJ', 'ij', 'J', 'j',
+    'K', 'k', 'k', 'L', 'l', 'L', 'l', 'L', 'l', 'L', 'l', 'L', 'l',
+    'N', 'n', 'N', 'n', 'N', 'n', "'n", 'N', 'n',
+    'O', 'o', 'O', 'o', 'O', 'o', 'Oe', 'oe',
+    'R', 'r', 'R', 'r', 'R', 'r', 'S', 's', 'S', 's', 'S', 's', 'S', 's',
+    'T', 't', 'T', 't', 'T', 't',
+    'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u',
+    'W', 'w', 'Y', 'y', 'Y', 'Z', 'z', 'Z', 'z', 'Z', 'z', 'ss'
   ];
 
   /** Used to provide falsey values to methods. */
@@ -332,7 +357,7 @@
   }());
 
   /** Used to detect instrumented istanbul code coverage runs. */
-  var coverage = root.__coverage__ || root[lodashStable.findKey(root, function(value, key) {
+  var coverage = root.__coverage__ || root[lodashStable.find(lodashStable.keys(root), function(key) {
     return /^(?:\$\$cov_\d+\$\$)$/.test(key);
   })];
 
@@ -2234,9 +2259,9 @@
       assert.expect(1);
 
       var actual = lodashStable.map(burredLetters, function(burred, index) {
-        var letter = deburredLetters[index];
+        var letter = deburredLetters[index].replace(/['\u2019]/g, '');
         if (caseName == 'start') {
-          letter = lodashStable.capitalize(letter);
+          letter = letter == 'IJ' ? letter : lodashStable.capitalize(letter);
         } else if (caseName == 'upper') {
           letter = letter.toUpperCase();
         } else {
@@ -2273,7 +2298,7 @@
       });
     });
 
-    QUnit.test('`_.' + methodName + '` should remove latin-1 mathematical operators', function(assert) {
+    QUnit.test('`_.' + methodName + '` should remove Latin mathematical operators', function(assert) {
       assert.expect(1);
 
       var actual = lodashStable.map(['\xd7', '\xf7'], func);
@@ -4377,18 +4402,18 @@
 
       var debounced = _.debounce(function() {
         ++callCount;
-      }, 64, { 'maxWait': 64 });
+      }, 200, { 'maxWait': 200 });
 
       debounced();
 
-      lodashStable.times(20, function(index) {
-        setTimeout(debounced, 54 + index);
-      });
+      setTimeout(debounced, 190);
+      setTimeout(debounced, 200);
+      setTimeout(debounced, 210);
 
       setTimeout(function() {
         assert.strictEqual(callCount, 2);
         done();
-      }, 160);
+      }, 500);
     });
 
     QUnit.test('should cancel `maxDelayed` when `delayed` is invoked', function(assert) {
@@ -4448,14 +4473,14 @@
   QUnit.module('lodash.deburr');
 
   (function() {
-    QUnit.test('should convert latin-1 supplementary letters to basic latin', function(assert) {
+    QUnit.test('should convert Latin-1 Supplement letters to basic Latin', function(assert) {
       assert.expect(1);
 
       var actual = lodashStable.map(burredLetters, _.deburr);
       assert.deepEqual(actual, deburredLetters);
     });
 
-    QUnit.test('should not deburr latin-1 mathematical operators', function(assert) {
+    QUnit.test('should not deburr Latin mathematical operators', function(assert) {
       assert.expect(1);
 
       var operators = ['\xd7', '\xf7'],
@@ -5784,26 +5809,6 @@
       assert.expect(1);
 
       assert.deepEqual(_.filter(array, isEven), [2]);
-    });
-
-    QUnit.test('should iterate over an object with numeric keys (test in Mobile Safari 8)', function(assert) {
-      assert.expect(1);
-
-      // Trigger a mobile Safari 8 JIT bug.
-      // See https://github.com/lodash/lodash/issues/799.
-      var counter = 0,
-          object = { '1': 'foo', '8': 'bar', '50': 'baz' };
-
-      lodashStable.times(1000, function(assert) {
-        _.filter([], stubTrue);
-      });
-
-      _.filter(object, function() {
-        counter++;
-        return true;
-      });
-
-      assert.strictEqual(counter, 3);
     });
   }());
 
@@ -7799,19 +7804,6 @@
         var path = isHas ? symbol : symbol2;
 
         assert.strictEqual(func(new Foo, path), true);
-      }
-      else {
-        skipAssert(assert);
-      }
-    });
-
-    QUnit.test('`_.' + methodName + '` should work for objects with a `[[Prototype]]` of `null`', function(assert) {
-      assert.expect(1);
-
-      if (create)  {
-        var object = create(null);
-        object[1] = 'a';
-        assert.strictEqual(func(object, 1), true);
       }
       else {
         skipAssert(assert);
@@ -10970,7 +10962,7 @@
     QUnit.test('should detect methods masquerading as native', function(assert) {
       assert.expect(2);
 
-      if (_._baseEach) {
+      if (!amd && _._baseEach) {
         var path = require('path'),
             basePath = path.dirname(filePath),
             uid = 'e0gvgyrad1jor',
@@ -11237,22 +11229,6 @@
       else {
         skipAssert(assert, 7);
       }
-    });
-
-    QUnit.test('should avoid V8 bug #2291 (test in Chrome 19-20)', function(assert) {
-      assert.expect(1);
-
-      // Trigger a V8 JIT bug.
-      // See https://code.google.com/p/v8/issues/detail?id=2291.
-      var object = {};
-
-      // First, have a comparison statement.
-      object == object;
-
-      // Then perform the check with `object`.
-      _.isObject(object);
-
-      assert.strictEqual(_.isObject('a'), false);
     });
   }(1, 2, 3));
 
@@ -12978,16 +12954,6 @@
       delete numberProto.a;
     });
 
-    QUnit.test('`_.' + methodName + '` should not coerce nullish values to objects', function(assert) {
-      assert.expect(2);
-
-      objectProto.a = 1;
-      lodashStable.each([null, undefined], function(value) {
-        assert.deepEqual(func(value), []);
-      });
-      delete objectProto.a;
-    });
-
     QUnit.test('`_.' + methodName + '` skips the `constructor` property on prototype objects', function(assert) {
       assert.expect(3);
 
@@ -13003,6 +12969,20 @@
       var Fake = { 'prototype': {} };
       Fake.prototype.constructor = Fake;
       assert.deepEqual(func(Fake.prototype), ['constructor']);
+    });
+
+    QUnit.test('`_.' + methodName + '` should return an empty array when `object` is nullish', function(assert) {
+      var values = [, null, undefined],
+          expected = lodashStable.map(values, stubArray);
+
+      var actual = lodashStable.map(values, function(value, index) {
+        objectProto.a = 1;
+        var result = index ? func(value) : func();
+        delete objectProto.a;
+        return result;
+      });
+
+      assert.deepEqual(actual, expected);
     });
   });
 
@@ -14081,14 +14061,22 @@
       });
     });
 
-    QUnit.test('should return `false` if parts of `path` are missing', function(assert) {
-      assert.expect(4);
+    QUnit.test('should return `false` when `object` is nullish', function(assert) {
+      assert.expect(2);
 
-      var object = {};
+      var values = [, null, undefined],
+          expected = lodashStable.map(values, stubFalse);
 
-      lodashStable.each(['a', 'a[1].b.c', ['a'], ['a', '1', 'b', 'c']], function(path) {
+      lodashStable.each(['constructor', ['constructor']], function(path) {
         var matches = _.matchesProperty(path, 1);
-        assert.strictEqual(matches(object), false);
+
+        var actual = lodashStable.map(values, function(value, index) {
+          try {
+            return index ? matches(value) : matches();
+          } catch (e) {}
+        });
+
+        assert.deepEqual(actual, expected);
       });
     });
 
@@ -14108,6 +14096,17 @@
         });
 
         assert.deepEqual(actual, expected);
+      });
+    });
+
+    QUnit.test('should return `false` if parts of `path` are missing', function(assert) {
+      assert.expect(4);
+
+      var object = {};
+
+      lodashStable.each(['a', 'a[1].b.c', ['a'], ['a', '1', 'b', 'c']], function(path) {
+        var matches = _.matchesProperty(path, 1);
+        assert.strictEqual(matches(object), false);
       });
     });
 
@@ -14347,25 +14346,6 @@
       }
       delete numberProto.a;
       delete numberProto.b;
-    });
-
-    QUnit.test('should return `false` when `object` is nullish', function(assert) {
-      assert.expect(2);
-
-      var values = [, null, undefined],
-          expected = lodashStable.map(values, stubFalse);
-
-      lodashStable.each(['constructor', ['constructor']], function(path) {
-        var matches = _.matchesProperty(path, 1);
-
-        var actual = lodashStable.map(values, function(value, index) {
-          try {
-            return index ? matches(value) : matches();
-          } catch (e) {}
-        });
-
-        assert.deepEqual(actual, expected);
-      });
     });
 
     QUnit.test('should return `true` when comparing a `srcValue` of empty arrays and objects', function(assert) {
@@ -15988,6 +15968,37 @@
       assert.strictEqual(negate(1), true);
       assert.strictEqual(negate(2), false);
     });
+
+    QUnit.test('should create a function that negates the result of `func`', function(assert) {
+      assert.expect(2);
+
+      var negate = _.negate(isEven);
+
+      assert.strictEqual(negate(1), true);
+      assert.strictEqual(negate(2), false);
+    });
+
+    QUnit.test('should create a function that accepts multiple arguments', function(assert) {
+      assert.expect(1);
+
+      var argCount,
+          count = 4,
+          negate = _.negate(function() { argCount = arguments.length; }),
+          expected = lodashStable.times(count, stubTrue);
+
+      var actual = lodashStable.times(count, function(index) {
+        switch (index) {
+          case 0: negate(); break;
+          case 1: negate(1); break;
+          case 2: negate(1, 2); break;
+          case 3: negate(1, 2, 3); break;
+          case 4: negate(1, 2, 3, 4);
+        }
+        return argCount == index;
+      });
+
+      assert.deepEqual(actual, expected);
+    });
   }());
 
   /*--------------------------------------------------------------------------*/
@@ -16261,11 +16272,12 @@
     QUnit.test('should return an empty object when `object` is nullish', function(assert) {
       assert.expect(2);
 
-      objectProto.a = 1;
       lodashStable.each([null, undefined], function(value) {
-        assert.deepEqual(_.omit(value, 'valueOf'), {});
+        objectProto.a = 1;
+        var actual = _.omit(value, 'valueOf');
+        delete objectProto.a;
+        assert.deepEqual(actual, {});
       });
-      delete objectProto.a;
     });
 
     QUnit.test('should work with `arguments` objects as secondary arguments', function(assert) {
@@ -19865,41 +19877,15 @@
       assert.deepEqual(actual, expected);
     });
 
-    QUnit.test('`_.' + methodName + '` should follow `path` over non-plain objects', function(assert) {
-      assert.expect(4);
-
-      var object = { 'a': '' },
-          paths = ['constructor.prototype.a', ['constructor', 'prototype', 'a']];
-
-      lodashStable.each(paths, function(path) {
-        func(0, path, updater);
-        assert.strictEqual(0..a, value);
-        delete numberProto.a;
-      });
-
-      lodashStable.each(['a.replace.b', ['a', 'replace', 'b']], function(path) {
-        func(object, path, updater);
-        assert.strictEqual(stringProto.replace.b, value);
-        delete stringProto.replace.b;
-      });
-    });
-
-    QUnit.test('`_.' + methodName + '` should not error on paths over primitives in strict mode', function(assert) {
-      'use strict';
-
+    QUnit.test('`_.' + methodName + '` should overwrite primitives in the path', function(assert) {
       assert.expect(2);
 
-      lodashStable.each(['a', 'a.a.a'], function(path) {
-        numberProto.a = oldValue;
-        try {
-          func(0, path, updater);
-          assert.strictEqual(0..a, oldValue);
-        } catch (e) {
-          assert.ok(false, e.message);
-        }
-      });
+      lodashStable.each(['a.b', ['a', 'b']], function(path) {
+        var object = { 'a': '' };
 
-      delete numberProto.a;
+        func(object, path, updater);
+        assert.deepEqual(object, { 'a': { 'b': 2 } });
+      });;
     });
 
     QUnit.test('`_.' + methodName + '` should not create an array for missing non-index property names that start with numbers', function(assert) {
@@ -25024,7 +25010,7 @@
   QUnit.module('lodash.words');
 
   (function() {
-    QUnit.test('should treat latin-1 supplementary letters as words', function(assert) {
+    QUnit.test('should match words containing Latin-1 Supplement letters', function(assert) {
       assert.expect(1);
 
       var expected = lodashStable.map(burredLetters, function(letter) {
