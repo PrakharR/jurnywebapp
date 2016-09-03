@@ -1,0 +1,51 @@
+.login-card {
+  max-width: 600px;
+  width: 100%;
+  md-card-title-text {
+    text-align: center;
+  }
+  p {
+    text-align: center;
+  }
+  .login-bottom {
+    text-align: center;
+    .login-btn {
+      margin-bottom: 16px;
+    }
+  }
+  .login-btn {
+    width: 200px;
+    height: 45px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .login-btn.facebook {
+    background-color: $facebook-color;
+    span {
+      color: #fff;
+    }
+  }
+  .login-btn.google {
+    background-color: $google-color;
+    span {
+      color: #fff;
+    }
+  }
+  .login-btn.jurny {
+    background-color: $jurny-color;
+    span {
+      color: #fff;
+    }
+  }
+  .signup-subhead {
+    margin-bottom: 8px;
+  }
+  .signup-form {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    @media screen and (max-width: 599px) {
+      width: 100%;
+    }
+  }
+}

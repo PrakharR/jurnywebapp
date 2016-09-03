@@ -1,0 +1,29 @@
+/* MIXINS */
+
+$jy-text-color: #616161;
+$jurny-color: #4caf50;
+$facebook-color: #3c5c99;
+$google-color: #d73d32;
+
+html *, md-input-container .md-input {
+  color: $jy-text-color;
+}
+
+.main-content {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+p {
+  margin: 0;
+}
+
+md-input-container {
+  margin: 8px 0;
+}
+.md-button {
+  margin: 8px 0;
+}
+.md-button.md-primary > span{
+  color: #fff;
+}

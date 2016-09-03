@@ -1,0 +1,22 @@
+<md-toolbar layout="row">
+  <div class="md-toolbar-tools">
+    <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleSidenav()">
+      <md-icon>menu</md-icon>
+    </md-button>
+    <h2>
+      <span class="make-text-white">Jurny</span>
+    </h2>
+    <span flex></span>
+    <md-button class="md-raised" aria-label="Create">
+      <span style="color: #4CAF50;">Create</span>
+    </md-button>
+    <md-button aria-label="Log In" ng-click="goToLogIn()" ng-if="!user">
+      <span class="make-text-white">Log In</span>
+    </md-button>
+    <md-button aria-label="Log In" ng-click="" ng-if="user">
+      <span class="make-text-white">Hi, {{user.first_name}}</span>
+    </md-button>
+  </div>
+</md-toolbar>
+<md-sidenav class="md-whiteframe-z2" md-component-id="left">
+</md-sidenav>

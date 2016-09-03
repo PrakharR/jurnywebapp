@@ -1,0 +1,67 @@
+<md-content layout="row" layout-align="center center">
+  <md-card class="login-card">
+    <md-card-title-text>
+      <span class="md-headline">Jurny</span>
+    </md-card-title-text>
+    <p class="signup-subhead">Create your Jurny Account</p>
+    <form name="signUpForm" class="signup-form"  ng-submit="signUpForm.$valid && doSignUp()">
+      <div layout-gt-xs="row">
+        <md-input-container flex>
+          <label>First Name</label>
+          <input ng-model="user.first_name" name="first_name" required>
+          <div ng-messages="signUpForm.first_name.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container flex>
+          <label>Last Name</label>
+          <input ng-model="user.last_name" name="last_name" required>
+          <div ng-messages="signUpForm.last_name.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+      </div>
+      <div layout-gt-xs="row">
+        <md-input-container flex>
+          <label>Email</label>
+          <input ng-model="user.email" name="email" required ng-pattern="/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/">
+          <div ng-messages="signUpForm.email.$error">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="pattern">Please input a valid email address.</div>
+          </div>
+        </md-input-container>
+      </div>
+      <div layout-gt-xs="row">
+        <md-input-container flex>
+          <label>Password</label>
+          <input ng-model="password" name="password" required>
+          <div ng-messages="signUpForm.password.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+      </div>
+      <div layout-gt-xs="row">
+        <md-input-container flex>
+          <label>Confirm Password</label>
+          <input ng-model="confirm_password" name="confirm_password" required compare-to="password">
+          <div ng-messages="signUpForm.confirm_password.$error">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="compareTo">Please make sure the passwords are the same.</div>
+          </div>
+        </md-input-container>
+      </div>
+      <div layout-gt-xs="row">
+        <md-input-container flex>
+          <label>Mobile</label>
+          <input ng-model="user.phone" name="phone" ng-pattern="/^[0-9]*$/">
+          <div ng-messages="signUpForm.phone.$error">
+            <div ng-message="pattern">Please input a valid phone number.</div>
+          </div>
+        </md-input-container>
+      </div>
+      <div class="login-bottom">
+        <md-button type="submit" class="md-raised md-primary login-btn">Create</md-button>
+      </div>
+    </form>
+  </md-card>
+</md-content>
