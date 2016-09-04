@@ -5,7 +5,7 @@
     </div>
     <p>Login to continue to Jurny</p>
     <div layout="column" ng-if="!isJurnyLogin">
-      <md-button class="md-raised login-btn facebook">Facebook</md-button>
+      <md-button class="md-raised login-btn facebook" ng-click="doFacebookLogin()">Facebook</md-button>
       <md-button class="md-raised login-btn google" ng-click="doGoogleLogin()">Google</md-button>
       <md-button class="md-raised md-primary login-btn" ng-click="showJurnyLogIn()">Jurny</md-button>
       <div class="login-bottom">
