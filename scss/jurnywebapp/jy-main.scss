@@ -27,3 +27,19 @@ md-input-container {
 .md-button.md-primary > span{
   color: #fff;
 }
+
+.navigation-bar {
+  .bar-title, md-icon, .md-button span {
+    color: #fff;
+  }
+  .create-btn span {
+    color: $jurny-color;
+  }
+}
+.navigation-bar.transparent {
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left:0;
+  right:0;
+}

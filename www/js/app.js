@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('jurnyWebApp', ['ionic','ngMaterial','ngMessages','firebase','state'])
+angular.module('jurnyWebApp', ['ionic','ngMaterial','ngMessages','firebase', 'ngCordova','state'])
 
 .run(function($ionicPlatform,$ionicLoading) {
   $ionicPlatform.ready(function() {
@@ -65,6 +65,15 @@ angular.module('jurnyWebApp', ['ionic','ngMaterial','ngMessages','firebase','sta
         'mainContent': {
           templateUrl: 'jurnywebapp/States/Signup/Signup.html',
           controller: 'signupCtrl'
+        }
+      }
+    })
+    .state('app.create', {
+      url: '^/create',
+      views: {
+        'mainContent': {
+          templateUrl: 'jurnywebapp/States/Create/Create.html',
+          controller: 'createCtrl'
         }
       }
     });

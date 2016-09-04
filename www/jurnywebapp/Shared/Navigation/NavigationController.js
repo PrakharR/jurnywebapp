@@ -6,6 +6,9 @@ navigationModule.controller('navigationCtrl',function($scope, $rootScope, $state
   $scope.goToLogIn = function() {
     $state.go('app.login');
   }
+  $scope.goToCreate = function() {
+    $state.go('app.create');
+  }
 
   $scope.toggleSidenav = function () {
     $mdSidenav('left').toggle();

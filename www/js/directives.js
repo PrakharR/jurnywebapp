@@ -2,7 +2,10 @@ directiveModule
   .directive('jyNavigation', function() {
     return {
       templateUrl: 'jurnywebapp/Shared/Navigation/Navigation.html',
-      controller: 'navigationCtrl'
+      controller: 'navigationCtrl',
+      scope: {
+          map: "=map"
+      }
     };
   })
   .directive('compareTo', function () {
