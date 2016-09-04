@@ -17,12 +17,12 @@
       <span>Sign Out</span>
     </md-button>
     <md-button aria-label="User" ng-click="" ng-if="user">
-      <span>Hi, {{user.first_name}}</span>
+      <span>Hi, {{user.first_name}} {{user.last_name}}</span>
     </md-button>
   </div>
 </md-toolbar>
 
-<md-toolbar layout="row" class="navigation-bar transparent" ng-if="map">
+<md-toolbar layout="row" class="navigation-bar transparent md-whiteframe-2dp" ng-if="map">
   <div class="md-toolbar-tools">
     <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleSidenav()">
       <md-icon>menu</md-icon>

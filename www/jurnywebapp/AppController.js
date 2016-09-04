@@ -1,4 +1,4 @@
-appModule.controller('appCtrl',function($scope, $rootScope, currentAuth, Storage){
+appModule.controller('appCtrl',function($scope, $rootScope, $state, currentAuth, Storage){
   $rootScope.user = null;
 
   $scope.initialForm = function() {
@@ -21,7 +21,8 @@ appModule.controller('appCtrl',function($scope, $rootScope, currentAuth, Storage
       // Sign-out successful.
       $rootScope.user = null;
       Storage.remove('user');
-      window.location.reload();
+      // window.location.reload();
+      $state.go('app.home', {}, { reload: true });
     }, function(error) {
       console.log(error);
     });

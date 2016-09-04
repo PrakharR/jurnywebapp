@@ -28,6 +28,12 @@ md-input-container {
   color: #fff;
 }
 
+md-dialog-actions {
+  .md-button.md-primary > span {
+    color: $jurny-color;
+  }
+}
+
 .navigation-bar {
   .bar-title, md-icon, .md-button span {
     color: #fff;
@@ -37,7 +43,10 @@ md-input-container {
   }
 }
 .navigation-bar.transparent {
-  background-color: transparent;
+  background-color: #fff;
+  .bar-title, md-icon, .md-button span {
+    color: $jy-text-color;
+  }
   position: absolute;
   top: 0;
   left:0;
