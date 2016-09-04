@@ -1,7 +1,6 @@
 'use strict';
 
-serviceModule
-.factory('Storage', function() {
+serviceModule.factory('Storage', function() {
 
   return {
     set: function(key, data) {

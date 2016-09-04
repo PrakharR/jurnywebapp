@@ -13,7 +13,10 @@
     <md-button aria-label="Log In" ng-click="goToLogIn()" ng-if="!user">
       <span class="make-text-white">Log In</span>
     </md-button>
-    <md-button aria-label="Log In" ng-click="" ng-if="user">
+    <md-button aria-label="Log In" ng-click="signOut()" ng-if="user">
+      <span class="make-text-white">Sign Out</span>
+    </md-button>
+    <md-button aria-label="User" ng-click="" ng-if="user">
       <span class="make-text-white">Hi, {{user.first_name}}</span>
     </md-button>
   </div>

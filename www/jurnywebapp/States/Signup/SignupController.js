@@ -1,4 +1,12 @@
-signupModule.controller('signupCtrl',function($scope, $state, Storage){
+signupModule.controller('signupCtrl',function($scope, $rootScope, $state, Auth, Storage){
+
+  // Block to check if user is signed in, redirect otherwise
+  $scope.goToHome = function() {
+    $state.go('app.home');
+  }
+  if($rootScope.user) {
+    $scope.goToHome();
+  }
 
   $scope.user = {
     first_name: null,
@@ -6,18 +14,13 @@ signupModule.controller('signupCtrl',function($scope, $state, Storage){
     email: null,
     phone: null
   }
-
   $scope.password = null;
-
-  $scope.goToHome = function() {
-    $state.go('app.home');
-  }
 
   $scope.doSignUp = function() {
     console.log('submitted');
     var email = $scope.user.email;
     var password = $scope.password;
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    Auth.$createUserWithEmailAndPassword(email, password).catch(function(error) {
       var errorCode = error.code;
       var errorMessage = error.message;
       if (errorCode == 'auth/weak-password') {
@@ -30,8 +33,7 @@ signupModule.controller('signupCtrl',function($scope, $state, Storage){
       if(user) {
         $scope.user.id = user.uid;
         firebase.database().ref('users/' + $scope.user.id).set($scope.user, function(response) {
-          console.log(response);
-          Storage.set('user',$scope.user);
+          $rootScope.logIn($scope.user);
           $scope.goToHome();
         });
       } else {

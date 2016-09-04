@@ -10231,7 +10231,7 @@ md-input-container {
     transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
   .login-card .login-btn.facebook {
     background-color: #3c5c99;
-    opacity: 0.95; }
+    opacity: 0.9; }
     .login-card .login-btn.facebook span {
       color: #fff; }
   .login-card .login-btn.facebook:hover {
@@ -10239,7 +10239,7 @@ md-input-container {
     opacity: 1; }
   .login-card .login-btn.google {
     background-color: #d73d32;
-    opacity: 0.95; }
+    opacity: 0.9; }
     .login-card .login-btn.google span {
       color: #fff; }
   .login-card .login-btn.google:hover {
