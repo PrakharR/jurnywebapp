@@ -21,8 +21,9 @@ appModule.controller('appCtrl',function($scope, $rootScope, currentAuth, Storage
       // Sign-out successful.
       $rootScope.user = null;
       Storage.remove('user');
+      window.location.reload();
     }, function(error) {
-      // An error happened.
+      console.log(error);
     });
   }
 

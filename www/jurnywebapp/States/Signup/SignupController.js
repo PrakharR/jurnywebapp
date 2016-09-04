@@ -17,7 +17,6 @@ signupModule.controller('signupCtrl',function($scope, $rootScope, $state, Auth, 
   $scope.password = null;
 
   $scope.doSignUp = function() {
-    console.log('submitted');
     var email = $scope.user.email;
     var password = $scope.password;
     Auth.$createUserWithEmailAndPassword(email, password).catch(function(error) {
