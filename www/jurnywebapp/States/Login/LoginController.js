@@ -26,8 +26,10 @@ loginModule.controller('loginCtrl',function($scope, $rootScope, $state, $http, A
       var token = result.credential.accessToken;
       // The signed-in user info.
       var user = result.user;
+      console.log(user);
       firebase.database().ref('/users/' + user.uid).once('value').then(function(snapshot) {
         var userExists = snapshot.val();
+        console.log(userExists);
         if (!userExists) {
           $http({
             method: 'GET',
