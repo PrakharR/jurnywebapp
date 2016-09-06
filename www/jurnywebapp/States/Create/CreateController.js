@@ -48,6 +48,7 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
       $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
     }, function(error){
+      console.log(error);
       console.log("Could not get location");
     });
 });
