@@ -1,0 +1,80 @@
+.add-location-dialog {
+  height: 500px;
+  max-height: 500px;
+  width: 800px;
+  max-width: 800px;
+
+  md-toolbar {
+    .md-toolbar-tools {
+      h2 {
+        color: #fff;
+      }
+    }
+  }
+  md-dialog-content {
+    margin-bottom: 52px;
+    .dialog-map-parent {
+      height: 200px;
+      width: 100%;
+      position: relative;
+      #dialogMap {
+        width: 100%;
+        height: 100%;
+      }
+      .location-pin {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        padding-bottom: 40px;
+        img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+    .input-row {
+      margin-top: 24px;
+      .image-input {
+        height: 112px;
+        width: 112px;
+        background: $jurny-color;
+        cursor: pointer;
+        position: relative;
+        border-radius: 4px;
+        .icon-circle {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: #fff;
+          md-icon {
+            color: $jurny-color;
+          }
+        }
+      }
+      .information-input {
+        margin-left: 24px;
+        height: 112px;
+        md-input-container {
+          &:first-of-type {
+            margin-right: 24px;
+            font-size: $jy-font-size-lx;
+          }
+          textarea {
+            height: 96px !important;
+            width: 250px;
+            line-height: 1.3;
+          }
+        }
+      }
+    }
+  }
+  md-dialog-actions {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #fff;
+  }
+}

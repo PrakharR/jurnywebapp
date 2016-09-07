@@ -1,14 +1,78 @@
 <ion-view>
     <ion-content>
       <jy-navigation map="true"></jy-navigation>
-      <div class="map-parent">
+      <div class="map-parent" ng-class="locations.length>0?'location-created':''">
         <div id="map" data-tap-disabled="true"></div>
         <div class="location-pin">
           <img ng-src="img/icons/jurny-location-pin.png" alt="Location Pin"/>
         </div>
       </div>
-      <div class="creator-toolbar md-whiteframe-2dp" ng-class="locations.length>0?'':'hidden'">
+      <div class="creator-toolbar md-whiteframe-2dp" ng-if="locations.length>0">
 
       </div>
     </ion-content>
 </ion-view>
+<md-fab-speed-dial ng-class="demo.selectedMode" class="add-location-fab">
+ <md-fab-trigger>
+   <md-button aria-label="menu" class="md-fab md-primary" ng-click="launchCreateLocationDialog($event)">
+     <md-icon class="material-icons">add</md-icon>
+   </md-button>
+ </md-fab-trigger>
+</md-fab-speed-dial>
+
+<div style="visibility:hidden;">
+  <div class="md-dialog-container" id="addLocationDialog">
+    <md-dialog aria-label="Mango (Fruit)" class="add-location-dialog">
+      <form ng-cloak>
+        <md-toolbar class="md-whiteframe-2dp">
+          <div class="md-toolbar-tools">
+            <h2>Add Location</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+              <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+            </md-button>
+          </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+          <div class="md-dialog-content">
+            <div layout="row" class="dialog-map-parent">
+              <div id="dialogMap" data-tap-disabled="true">
+              </div>
+              <div class="location-pin">
+                <img ng-src="img/icons/jurny-location-pin.png" alt="Location Pin"/>
+              </div>
+            </div>
+            <div layout-gt-xs="row" class="input-row">
+              <div class="image-input md-whiteframe-2dp" layout="row" layout-align="center center">
+                <div class="icon-circle" layout="row" layout-align="center center">
+                  <md-icon class="material-icons">photo_camera</md-icon>
+                </div>
+              </div>
+              <div class="information-input" layout-gt-xs="row">
+                <md-input-container class="md-block">
+                  <label>Title</label>
+                  <textarea ng-model="title" md-maxlength="20" rows="5" md-select-on-focus></textarea>
+                </md-input-container>
+                <md-input-container class="md-block">
+                  <label>Description</label>
+                  <textarea ng-model="description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                </md-input-container>
+              </div>
+            </div>
+          </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row" class="md-whiteframe-2dp">
+          <span flex></span>
+          <md-button ng-click="cancel()">
+           Cancel
+          </md-button>
+          <md-button class="md-primary md-raised" ng-click="add()">
+            Add
+          </md-button>
+        </md-dialog-actions>
+      </form>
+    </md-dialog>
+  </div>
+</div>

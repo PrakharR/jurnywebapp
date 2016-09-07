@@ -27,39 +27,73 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
   }, 2000);
 
   $scope.locations = [
-    {
-      name: "HKU Main Building",
-      description: "This is the HKU main building, a place of worship for bookworms.",
-      picture: "",
-      lat: "",
-      lon: ""
-    },
-    {
-      name: "Subway Sandwiches",
-      description: "This is the HKU main building, a place of worship for bookworms.",
-      picture: "",
-      lat: "",
-      lon: ""
-    }
+    // {
+    //   name: "HKU Main Building",
+    //   description: "This is the HKU main building, a place of worship for bookworms.",
+    //   picture: "",
+    //   lat: "",
+    //   lon: ""
+    // },
+    // {
+    //   name: "Subway Sandwiches",
+    //   description: "This is the HKU main building, a place of worship for bookworms.",
+    //   picture: "",
+    //   lat: "",
+    //   lon: ""
+    // }
   ];
 
   var options = {timeout: 10000, enableHighAccuracy: true};
-    $cordovaGeolocation.getCurrentPosition(options).then(function(position){
-      var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      var mapOptions = {
-        center: latLng,
-        zoom: 20,
-        MapTypeControlOptions: {
-          mapTypeIds: []
-        },
-        disableDefaultUI: true,
-        mapTypeControl: false,
-        scaleControl: true,
-        zoomControl: true
-      };
-      $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    }, function(error){
-      console.log(error);
-      console.log("Could not get location");
+  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    var mapOptions = {
+      center: latLng,
+      zoom: 20,
+      MapTypeControlOptions: {
+        mapTypeIds: []
+      },
+      disableDefaultUI: true,
+      mapTypeControl: false,
+      scaleControl: true,
+      zoomControl: true
+    };
+    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  }, function(error){
+    console.log(error);
+    console.log("Could not get location");
+  });
+
+  $scope.launchCreateLocationDialog = function(ev) {
+    var parentEl = angular.element(document.body);
+    var addLatLng = $scope.map.getCenter();
+    var mapOptions = {
+      center: addLatLng,
+      zoom: 20,
+      MapTypeControlOptions: {
+        mapTypeIds: []
+      },
+      disableDefaultUI: true,
+      draggable: false,
+      scrollwheel: false,
+      disableDoubleClickZoom: true,
+      mapTypeControl: false,
+      scaleControl: false,
+      zoomControl: false
+    };
+    $scope.dialogMap = new google.maps.Map(document.getElementById("dialogMap"), mapOptions);
+
+    $mdDialog.show({
+      contentElement: '#addLocationDialog',
+      parent: parentEl,
+      targetEvent: ev,
+      clickOutsideToClose:true,
+      fullscreen: true
     });
+  };
+  $scope.cancel = function() {
+    $mdDialog.hide();
+  };
+  $scope.add = function() {
+
+  }
 });
