@@ -7,7 +7,6 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
   $scope.goToHome = function() {
     $state.go('app.home');
   }
-
   $timeout(function() {
     if(!$rootScope.user) {
       $mdDialog.show(
@@ -27,15 +26,29 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
     }
   }, 2000);
 
+  $scope.locations = [
+    {
+      name: "HKU Main Building",
+      description: "This is the HKU main building, a place of worship for bookworms.",
+      picture: "",
+      lat: "",
+      lon: ""
+    },
+    {
+      name: "Subway Sandwiches",
+      description: "This is the HKU main building, a place of worship for bookworms.",
+      picture: "",
+      lat: "",
+      lon: ""
+    }
+  ];
+
   var options = {timeout: 10000, enableHighAccuracy: true};
-
     $cordovaGeolocation.getCurrentPosition(options).then(function(position){
-
       var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
       var mapOptions = {
         center: latLng,
-        zoom: 15,
+        zoom: 20,
         MapTypeControlOptions: {
           mapTypeIds: []
         },
@@ -44,9 +57,7 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
         scaleControl: true,
         zoomControl: true
       };
-
       $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
     }, function(error){
       console.log(error);
       console.log("Could not get location");

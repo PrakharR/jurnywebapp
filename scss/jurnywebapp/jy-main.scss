@@ -1,12 +1,35 @@
 /* MIXINS */
 
 $jy-text-color: #616161;
+$jy-text-color-dark: #555555;
 $jurny-color: #4caf50;
 $facebook-color: #3c5c99;
 $google-color: #d73d32;
+$jy-link-color: #039be5;
+
+$jy-font-weight-light: 300;
+$jy-font-weight-regular: 400;
+$jy-font-weight-medium: 500;
+$jy-font-weight-bold: 700;
+
+$jy-font-size-sxx: 0.625em;   //10
+$jy-font-size-sx: 0.75em;     //12
+$jy-font-size-small: 0.875em; //14
+$jy-font-size-regular: 1em;   //16
+$jy-font-size-large: 1.125em; //18
+$jy-font-size-lx: 1.25em;     //20
+$jy-font-size-lxx: 1.5em;     //24
+$jy-font-size-lxxx: 2em;      //32
+$jy-font-size-lxxxx: 2.5em;   //40
 
 html *, md-input-container .md-input {
   color: $jy-text-color;
+  font-family: Roboto;
+}
+
+a {
+  color: $jy-link-color;
+  cursor: pointer;
 }
 
 .main-content {
@@ -41,7 +64,47 @@ md-dialog-actions {
   .create-btn span {
     color: $jurny-color;
   }
+  .user-avatar-menu {
+    margin-left: 14px;
+    margin-right: 0px !important;
+    .md-button {
+      margin: 0;
+      padding: 0;
+      img {
+        height: 36px;
+        width:36px;
+        border-radius: 50%;
+      }
+    }
+  }
 }
+
+.user-avatar-menu-content {
+  height: 88px;
+  padding: 0;
+  md-menu-item {
+    padding-left: 16px;
+    padding-right: 16px;
+    height: 100%;
+    img {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      margin: 16px;
+    }
+    .email {
+      margin-top: 24px;
+      font-size: $jy-font-size-regular;
+      color: $jy-text-color-dark;
+    }
+    .sign-out {
+      margin-top: 8px;
+      font-weight: $jy-font-weight-medium;
+    }
+  }
+}
+
 .navigation-bar.transparent {
   background-color: #fff;
   .bar-title, md-icon, .md-button span {

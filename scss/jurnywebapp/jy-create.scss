@@ -22,3 +22,16 @@ div.map-parent {
     }
   }
 }
+
+div.creator-toolbar {
+  display: block;
+  position: absolute;
+  right:0;
+  bottom:0;
+  width: 68px;
+  background-color: #fff;
+  height: 100%;
+  &.hidden {
+    display: none;
+  }
+}

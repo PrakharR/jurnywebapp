@@ -10187,7 +10187,12 @@ textarea {
 
 /* MIXINS */
 html *, md-input-container .md-input {
-  color: #616161; }
+  color: #616161;
+  font-family: Roboto; }
+
+a {
+  color: #039be5;
+  cursor: pointer; }
 
 .main-content {
   max-width: 850px;
@@ -10213,6 +10218,38 @@ md-dialog-actions .md-button.md-primary > span {
 
 .navigation-bar .create-btn span {
   color: #4caf50; }
+
+.navigation-bar .user-avatar-menu {
+  margin-left: 14px;
+  margin-right: 0px !important; }
+  .navigation-bar .user-avatar-menu .md-button {
+    margin: 0;
+    padding: 0; }
+    .navigation-bar .user-avatar-menu .md-button img {
+      height: 36px;
+      width: 36px;
+      border-radius: 50%; }
+
+.user-avatar-menu-content {
+  height: 88px;
+  padding: 0; }
+  .user-avatar-menu-content md-menu-item {
+    padding-left: 16px;
+    padding-right: 16px;
+    height: 100%; }
+    .user-avatar-menu-content md-menu-item img {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      margin: 16px; }
+    .user-avatar-menu-content md-menu-item .email {
+      margin-top: 24px;
+      font-size: 1em;
+      color: #555555; }
+    .user-avatar-menu-content md-menu-item .sign-out {
+      margin-top: 8px;
+      font-weight: 500; }
 
 .navigation-bar.transparent {
   background-color: #fff;
@@ -10292,3 +10329,14 @@ div.map-parent {
     div.map-parent .location-pin img {
       width: 40px;
       height: 40px; }
+
+div.creator-toolbar {
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 68px;
+  background-color: #fff;
+  height: 100%; }
+  div.creator-toolbar.hidden {
+    display: none; }

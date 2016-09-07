@@ -18,7 +18,11 @@
   },
   "cordovaPlugins": [],
   "cordovaPlatforms": [
-    "ios"
+    "ios",
+    {
+      "platform": "android",
+      "locator": "browser"
+    }
   ],
   "scripts": {
     "start": "node server.js"

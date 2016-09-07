@@ -12,6 +12,7 @@ appModule.controller('appCtrl',function($scope, $rootScope, $state, currentAuth,
   }
 
   $rootScope.logIn = function(user) {
+    user.picture = user.picture?user.picture:'img/icons/avatar.jpg';
     $rootScope.user = user;
     Storage.set('user',user);
   }
