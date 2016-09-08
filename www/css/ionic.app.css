@@ -10353,7 +10353,9 @@ div.creator-toolbar {
       margin-right: 16px;
       cursor: pointer;
       position: relative;
-      border-radius: 4px; }
+      border-radius: 4px;
+      background-size: cover;
+      background-position: center; }
       div.creator-toolbar .locations-parent .location-box span {
         position: absolute;
         top: 50%;
@@ -10412,7 +10414,9 @@ div.creator-toolbar {
         background: #4caf50;
         cursor: pointer;
         position: relative;
-        border-radius: 4px; }
+        border-radius: 4px;
+        background-size: cover;
+        background-position: center; }
         .add-location-dialog md-dialog-content .input-row .image-input .icon-circle {
           width: 36px;
           height: 36px;

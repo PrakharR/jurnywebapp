@@ -76,7 +76,8 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
       title: '',
       description: '',
       lat: addLatLng.lat(),
-      lon: addLatLng.lng()
+      lon: addLatLng.lng(),
+      image: ''
     }
 
     $mdDialog.show({

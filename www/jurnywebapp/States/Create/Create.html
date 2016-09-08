@@ -11,8 +11,8 @@
         <div class="locations-parent" layout="row" layout-align="start center">
           <div flex></div>
           <!-- <div class="location-box" ng-repeat="location in tour.locations"> -->
-          <div class="location-box md-whiteframe-2dp" ng-repeat="location in tour.locations">
-            <span>J</span>
+          <div class="location-box md-whiteframe-2dp" ng-repeat="location in tour.locations" ng-style="{'background-image': 'url(' + location.image + ')'}">
+            <span ng-if="!location.image">J</span>
             <div class="location-number md-whiteframe-1dp" layout="row" layout-align="center center">{{$index+1}}</div>
           </div>
           <div flex></div>
@@ -29,7 +29,8 @@
 </md-fab-speed-dial>
 
 <div style="visibility:hidden;">
-  <div class="md-dialog-container" id="addLocationDialog">
+  <div class="md-dialog-container" id="addLocationDialog"  file-dropzone="[image/png, image/jpeg, image/gif]"
+                  file="newLocation.image" file-name="imageFileName">
     <md-dialog aria-label="Mango (Fruit)" class="add-location-dialog">
       <form ng-cloak>
         <md-toolbar class="md-whiteframe-2dp">
@@ -52,7 +53,7 @@
               </div>
             </div>
             <div layout-gt-xs="row" class="input-row">
-              <div class="image-input md-whiteframe-2dp" layout="row" layout-align="center center">
+              <div class="image-input md-whiteframe-2dp" layout="row" layout-align="center center" ng-style="{'background-image': 'url(' + newLocation.image + ')'}">
                 <div class="icon-circle" layout="row" layout-align="center center">
                   <md-icon class="material-icons">photo_camera</md-icon>
                 </div>
