@@ -1,4 +1,4 @@
-createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordovaGeolocation, $mdDialog, $timeout){
+createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordovaGeolocation, $mdDialog, $timeout, $window){
 
   // Block to check if user is signed in, redirect otherwise
   $scope.goToLogin = function() {
@@ -26,22 +26,11 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
     }
   }, 2000);
 
-  $scope.locations = [
-    // {
-    //   name: "HKU Main Building",
-    //   description: "This is the HKU main building, a place of worship for bookworms.",
-    //   picture: "",
-    //   lat: "",
-    //   lon: ""
-    // },
-    // {
-    //   name: "Subway Sandwiches",
-    //   description: "This is the HKU main building, a place of worship for bookworms.",
-    //   picture: "",
-    //   lat: "",
-    //   lon: ""
-    // }
-  ];
+  $scope.tour = {
+    title: '',
+    description: '',
+    locations: []
+  }
 
   var options = {timeout: 10000, enableHighAccuracy: true};
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
@@ -68,7 +57,7 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
     var addLatLng = $scope.map.getCenter();
     var mapOptions = {
       center: addLatLng,
-      zoom: 20,
+      zoom: 18,
       MapTypeControlOptions: {
         mapTypeIds: []
       },
@@ -78,9 +67,17 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
       disableDoubleClickZoom: true,
       mapTypeControl: false,
       scaleControl: false,
-      zoomControl: false
+      zoomControl: false,
+      clickableIcons: false
     };
     $scope.dialogMap = new google.maps.Map(document.getElementById("dialogMap"), mapOptions);
+
+    $scope.newLocation = {
+      title: '',
+      description: '',
+      lat: addLatLng.lat(),
+      lon: addLatLng.lng()
+    }
 
     $mdDialog.show({
       contentElement: '#addLocationDialog',
@@ -90,10 +87,14 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
       fullscreen: true
     });
   };
+
   $scope.cancel = function() {
+    $scope.newLocation = null;
     $mdDialog.hide();
   };
   $scope.add = function() {
-
+    $scope.tour.locations.push($scope.newLocation);
+    $mdDialog.hide();
+    console.log($scope.tour);
   }
 });

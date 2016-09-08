@@ -10327,7 +10327,7 @@ div.map-parent {
       width: 40px;
       height: 40px; }
   div.map-parent.location-created {
-    padding-bottom: 46px; }
+    padding-bottom: 51px; }
 
 div.creator-toolbar {
   display: block;
@@ -10336,10 +10336,37 @@ div.creator-toolbar {
   left: 0;
   right: 0;
   width: 100%;
-  height: 46px;
+  height: 51px;
   background-color: #fff; }
   div.creator-toolbar.hidden {
     display: none; }
+  div.creator-toolbar .locations-parent {
+    height: 100%;
+    overflow-x: hidden; }
+    div.creator-toolbar .locations-parent .location-box {
+      height: 36px;
+      width: 36px;
+      background: #4caf50;
+      margin-left: 16px;
+      margin-right: 16px;
+      cursor: pointer;
+      position: relative; }
+      div.creator-toolbar .locations-parent .location-box span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        font-size: 1.25em; }
+      div.creator-toolbar .locations-parent .location-box .location-number {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #fff;
+        color: #4caf50;
+        position: absolute;
+        top: -6px;
+        left: -6px; }
 
 .add-location-fab {
   position: absolute;

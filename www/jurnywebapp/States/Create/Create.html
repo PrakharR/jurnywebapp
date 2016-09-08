@@ -1,14 +1,22 @@
 <ion-view>
     <ion-content>
       <jy-navigation map="true"></jy-navigation>
-      <div class="map-parent" ng-class="locations.length>0?'location-created':''">
+      <div class="map-parent" ng-class="tour.locations.length>0?'location-created':''">
         <div id="map" data-tap-disabled="true"></div>
         <div class="location-pin">
           <img ng-src="img/icons/jurny-location-pin.png" alt="Location Pin"/>
         </div>
       </div>
-      <div class="creator-toolbar md-whiteframe-2dp" ng-if="locations.length>0">
-
+      <div class="creator-toolbar md-whiteframe-2dp" ng-if="tour.locations.length>0">
+        <div class="locations-parent" layout="row" layout-align="center center">
+          <div flex></div>
+          <!-- <div class="location-box" ng-repeat="location in tour.locations"> -->
+          <div class="location-box md-whiteframe-2dp" ng-repeat="location in tour.locations">
+            <span>J</span>
+            <div class="location-number md-whiteframe-1dp" layout="row" layout-align="center center">{{$index+1}}</div>
+          </div>
+          <div flex></div>
+        </div>
       </div>
     </ion-content>
 </ion-view>
@@ -52,11 +60,11 @@
               <div class="information-input" layout-gt-xs="row">
                 <md-input-container class="md-block">
                   <label>Title</label>
-                  <textarea ng-model="title" md-maxlength="20" rows="5" md-select-on-focus></textarea>
+                  <textarea ng-model="newLocation.title" md-maxlength="20" rows="5" md-select-on-focus></textarea>
                 </md-input-container>
                 <md-input-container class="md-block">
                   <label>Description</label>
-                  <textarea ng-model="description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                  <textarea ng-model="newLocation.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
                 </md-input-container>
               </div>
             </div>
