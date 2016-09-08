@@ -10337,20 +10337,23 @@ div.creator-toolbar {
   right: 0;
   width: 100%;
   height: 51px;
-  background-color: #fff; }
+  background-color: #fff;
+  overflow-x: scroll; }
   div.creator-toolbar.hidden {
     display: none; }
   div.creator-toolbar .locations-parent {
-    height: 100%;
-    overflow-x: hidden; }
+    height: 100%; }
     div.creator-toolbar .locations-parent .location-box {
       height: 36px;
+      min-height: 36px;
       width: 36px;
+      min-width: 36px;
       background: #4caf50;
       margin-left: 16px;
       margin-right: 16px;
       cursor: pointer;
-      position: relative; }
+      position: relative;
+      border-radius: 4px; }
       div.creator-toolbar .locations-parent .location-box span {
         position: absolute;
         top: 50%;

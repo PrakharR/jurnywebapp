@@ -35,20 +35,23 @@ div.creator-toolbar {
   width: 100%;
   height: 51px;
   background-color: #fff;
+  overflow-x: scroll;
   &.hidden {
     display: none;
   }
   .locations-parent {
     height:100%;
-    overflow-x:hidden;
     .location-box {
       height:36px;
+      min-height:36px;
       width:36px;
+      min-width:36px;
       background: $jurny-color;
       margin-left: 16px;
       margin-right: 16px;
       cursor:pointer;
       position: relative;
+      border-radius: 4px;
       span {
         position:absolute;
         top:50%;
