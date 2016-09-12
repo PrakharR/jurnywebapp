@@ -20,12 +20,26 @@
       </div>
     </ion-content>
 </ion-view>
-<md-fab-speed-dial ng-class="demo.selectedMode" class="add-location-fab">
+<md-button class="md-whiteframe-z1 add-location-fab" ng-click="launchCreateLocationDialog($event)">Add Location</md-button>
+<md-autocomplete class="maps-search" md-no-cache="true"
+                 md-selected-item="selectedItem"
+                 md-selected-item-change="searchLocationSelected()"
+                 md-search-text-change="search(searchText)"
+                 md-search-text="searchText"
+                 md-items="item in search(searchText)"
+                 md-item-text="item"
+                 md-min-length="0"
+                 placeholder="Search">
+  <md-item-template>
+    <span md-highlight-text="searchText" md-highlight-flags="^i">{{item}}</span>
+  </md-item-template>
+</md-autocomplete>
+<!-- <md-fab-speed-dial ng-class="demo.selectedMode" class="add-location-fab">
  <md-fab-trigger>
    <md-button aria-label="menu" class="md-fab md-primary" ng-click="launchCreateLocationDialog($event)">
      <md-icon class="material-icons">add</md-icon>
    </md-button>
- </md-fab-trigger>
+ </md-fab-trigger> -->
 </md-fab-speed-dial>
 
 <div style="visibility:hidden;">
@@ -59,14 +73,16 @@
                 </div>
               </div>
               <div class="information-input" layout-gt-xs="row">
-                <md-input-container class="md-block">
-                  <label>Title</label>
-                  <textarea ng-model="newLocation.title" md-maxlength="20" rows="5" md-select-on-focus></textarea>
-                </md-input-container>
-                <md-input-container class="md-block">
-                  <label>Description</label>
-                  <textarea ng-model="newLocation.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-                </md-input-container>
+                <form name="addLocationForm">
+                  <md-input-container class="md-block">
+                    <label>Title</label>
+                    <textarea required md-no-asterisk ng-model="newLocation.title" md-maxlength="20" rows="5" md-select-on-focus></textarea>
+                  </md-input-container>
+                  <md-input-container class="md-block">
+                    <label>Description</label>
+                    <textarea required md-no-asterisk ng-model="newLocation.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                  </md-input-container>
+                </form>
               </div>
             </div>
           </div>

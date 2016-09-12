@@ -33,6 +33,12 @@ a {
   cursor: pointer;
 }
 
+.md-button.md-default-theme.md-primary, .md-button.md-primary {
+  span {
+    color: $jurny-color;
+  }
+}
+
 .main-content {
   max-width: 850px;
   margin: 0 auto;

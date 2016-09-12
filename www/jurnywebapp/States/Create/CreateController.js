@@ -1,4 +1,4 @@
-createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordovaGeolocation, $mdDialog, $timeout, $window){
+createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordovaGeolocation, $mdDialog, $timeout, $window, $q){
 
   // Block to check if user is signed in, redirect otherwise
   $scope.goToLogin = function() {
@@ -31,6 +31,42 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
     description: '',
     locations: []
   }
+
+  // MAPS SEARCH BLOCK START
+
+  var gmapsService = new google.maps.places.AutocompleteService();
+
+  $scope.search = function(address) {
+    var deferred = $q.defer();
+    if(address.length > 0) {
+      getResults(address).then(
+        function (predictions) {
+          var results = [];
+          for (var i = 0, prediction; prediction = predictions[i]; i++) {
+            results.push(prediction.description);
+          }
+          deferred.resolve(results);
+        }
+      );
+    } else {deferred.resolve({});}
+   return deferred.promise;
+  }
+
+  function getResults(address) {
+    var deferred = $q.defer();
+    gmapsService.getQueryPredictions({input: address}, function (data) {
+      deferred.resolve(data);
+    });
+    return deferred.promise;
+  }
+
+  $scope.searchLocationSelected = function() {
+    // var autocomplete = new google.maps.places.Autocomplete($scope.selectedItem);
+    // var place = gmapsService.getPlace();
+    // console.log(place);
+  }
+
+  // MAPS SEARCH BLOCK END
 
   var options = {timeout: 10000, enableHighAccuracy: true};
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
