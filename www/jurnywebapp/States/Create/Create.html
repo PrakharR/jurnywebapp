@@ -18,22 +18,14 @@
           <div flex></div>
         </div>
       </div>
+      <md-button class="md-whiteframe-z1 add-location-fab" ng-click="launchCreateLocationDialog($event)">Add Location</md-button>
+      <place-autocomplete class="maps-search" callback="locationSelectedFromSearch"></place-autocomplete>
+      <!-- <div ng-if="location.name">
+        <h4>Selected location</h4>
+        <pre>{{location|json}}</pre>
+      </div> -->
     </ion-content>
 </ion-view>
-<md-button class="md-whiteframe-z1 add-location-fab" ng-click="launchCreateLocationDialog($event)">Add Location</md-button>
-<md-autocomplete class="maps-search" md-no-cache="true"
-                 md-selected-item="selectedItem"
-                 md-selected-item-change="searchLocationSelected()"
-                 md-search-text-change="search(searchText)"
-                 md-search-text="searchText"
-                 md-items="item in search(searchText)"
-                 md-item-text="item"
-                 md-min-length="0"
-                 placeholder="Search">
-  <md-item-template>
-    <span md-highlight-text="searchText" md-highlight-flags="^i">{{item}}</span>
-  </md-item-template>
-</md-autocomplete>
 <!-- <md-fab-speed-dial ng-class="demo.selectedMode" class="add-location-fab">
  <md-fab-trigger>
    <md-button aria-label="menu" class="md-fab md-primary" ng-click="launchCreateLocationDialog($event)">

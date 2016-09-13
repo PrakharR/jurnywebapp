@@ -87,4 +87,65 @@ directiveModule
         });
       }
     };
+  })
+  .directive('placeAutocomplete', function() {
+    return {
+      templateUrl: 'jurnywebapp/Shared/PlaceAutocomplete.html',
+      restrict: 'E',
+      replace: true,
+      scope: {
+        'callback': '='
+      },
+      controller: function($scope, $q) {
+        if (!google || !google.maps) {
+          throw new Error('Google Maps JS library is not loaded!');
+        } else if (!google.maps.places) {
+          throw new Error('Google Maps JS library does not have the Places module');
+        }
+        var autocompleteService = new google.maps.places.AutocompleteService();
+        var map = new google.maps.Map(document.createElement('div'));
+        var placeService = new google.maps.places.PlacesService(map);
+        var ngModel = {};
+        var getResults = function(address) {
+          var deferred = $q.defer();
+          autocompleteService.getQueryPredictions({
+            input: address
+          }, function(data) {
+            deferred.resolve(data);
+          });
+          return deferred.promise;
+        };
+        var getDetails = function(place) {
+          var deferred = $q.defer();
+          placeService.getDetails({
+            'placeId': place.place_id
+          }, function(details) {
+            deferred.resolve(details);
+          });
+          return deferred.promise;
+        };
+        $scope.search = function(input) {
+          if (!input) {
+            return;
+          }
+          return getResults(input).then(function(places) {
+            return places;
+          });
+        };
+        $scope.getLatLng = function(place) {
+          if (!place) {
+            ngModel = {};
+            return;
+          }
+          getDetails(place).then(function(details) {
+            ngModel = {
+              'name': place.description,
+              'latitude': details.geometry.location.lat(),
+              'longitude': details.geometry.location.lng(),
+            };
+            $scope.callback(ngModel);
+          });
+        }
+      }
+    };
   });

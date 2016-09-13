@@ -82,7 +82,7 @@ div.creator-toolbar {
   left: 423px;
   z-index: 1;
   margin: 0;
-  height: 40px;
+  height: 48px;
   background-color: #fff !important;
   span {
     color: $jurny-color;
@@ -94,14 +94,18 @@ div.creator-toolbar {
   top: 87px;
   left: 23px;
   z-index: 1;
-  width: 400px;
-  // height: 60px;
-  md-autocomplete-wrap {
-    // height: 60px;
-    input {
-      // height: 60px;
-      color: $jy-text-color;
-      font-size: $jy-font-size-large;
+  md-autocomplete {
+    width: 400px;
+    height: 48px;
+    md-autocomplete-wrap {
+      height: 48px;
+      input {
+        // height: 60px;
+        margin: auto 0px;
+        // max-width: 300px;
+        color: $jy-text-color;
+        font-size: $jy-font-size-large;
+      }
     }
   }
 }

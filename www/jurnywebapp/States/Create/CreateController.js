@@ -32,41 +32,12 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
     locations: []
   }
 
-  // MAPS SEARCH BLOCK START
-
-  var gmapsService = new google.maps.places.AutocompleteService();
-
-  $scope.search = function(address) {
-    var deferred = $q.defer();
-    if(address.length > 0) {
-      getResults(address).then(
-        function (predictions) {
-          var results = [];
-          for (var i = 0, prediction; prediction = predictions[i]; i++) {
-            results.push(prediction.description);
-          }
-          deferred.resolve(results);
-        }
-      );
-    } else {deferred.resolve({});}
-   return deferred.promise;
+  // Google places search callback
+  $scope.location;
+  $scope.locationSelectedFromSearch = function(location) {
+    console.log(location);
+    centerMapOnLatLng(location.latitude,location.longitude);
   }
-
-  function getResults(address) {
-    var deferred = $q.defer();
-    gmapsService.getQueryPredictions({input: address}, function (data) {
-      deferred.resolve(data);
-    });
-    return deferred.promise;
-  }
-
-  $scope.searchLocationSelected = function() {
-    // var autocomplete = new google.maps.places.Autocomplete($scope.selectedItem);
-    // var place = gmapsService.getPlace();
-    // console.log(place);
-  }
-
-  // MAPS SEARCH BLOCK END
 
   var options = {timeout: 10000, enableHighAccuracy: true};
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
@@ -87,6 +58,10 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
     console.log(error);
     console.log("Could not get location");
   });
+
+  var centerMapOnLatLng = function(lat,lng) {
+    $scope.map.setCenter({lat: lat, lng: lng});
+  }
 
   $scope.launchCreateLocationDialog = function(ev) {
     var parentEl = angular.element(document.body);
