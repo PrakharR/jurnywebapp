@@ -11,7 +11,7 @@
         <div class="locations-parent" layout="row" layout-align="start center">
           <div flex></div>
           <!-- <div class="location-box" ng-repeat="location in tour.locations"> -->
-          <div class="location-box md-whiteframe-2dp" ng-repeat="location in tour.locations" ng-style="{'background-image': 'url(' + location.image + ')'}">
+          <div class="location-box md-whiteframe-2dp" ng-repeat="location in tour.locations" ngf-background="location.images[0]">
             <span ng-if="!location.image">J</span>
             <div class="location-number md-whiteframe-1dp" layout="row" layout-align="center center">{{$index+1}}</div>
           </div>
@@ -35,11 +35,10 @@
 </md-fab-speed-dial>
 
 <div style="visibility:hidden;">
-  <div class="md-dialog-container" id="addLocationDialog"  file-dropzone="[image/png, image/jpeg, image/gif]"
-                  file="newLocation.image" file-name="imageFileName">
-    <md-dialog aria-label="Mango (Fruit)" class="add-location-dialog">
-      <form ng-cloak>
-        <md-toolbar class="md-whiteframe-2dp">
+  <div class="md-dialog-container" id="addLocationDialog"  ngf-drop="imageSelected('drag')" ng-model="draggedImages" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'" ngf-max-files="maxFiles" ngf-drop-disabled="disableImageUpload">
+    <md-dialog aria-label="Add Location Dialog" class="add-location-dialog">
+      <form name="locationForm" ng-cloak>
+        <md-toolbar>
           <div class="md-toolbar-tools">
             <h2>Add Location</h2>
             <span flex></span>
@@ -48,7 +47,6 @@
             </md-button>
           </div>
         </md-toolbar>
-
         <md-dialog-content>
           <div class="md-dialog-content">
             <div layout="row" class="dialog-map-parent">
@@ -59,33 +57,39 @@
               </div>
             </div>
             <div layout-gt-xs="row" class="input-row">
-              <div class="image-input md-whiteframe-2dp" layout="row" layout-align="center center" ng-style="{'background-image': 'url(' + newLocation.image + ')'}">
-                <div class="icon-circle" layout="row" layout-align="center center">
+              <div layout="column" id="locationImageInput" class="image-input md-whiteframe-2dp" ngf-select="imageSelected('select')" ng-model="selectedImages" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'" ngf-max-files="maxFiles" ngf-select-disabled="disableImageUpload">
+                <div class="icon-circle" layout="row" layout-align="center center" ng-if="newLocation.images.length<=0">
                   <md-icon class="material-icons">photo_camera</md-icon>
+                </div>
+                <div layout="row" style="height:50%">
+                  <div class="image-thumbnail" flex="50" ng-repeat="locationImage in newLocation.images | limitTo:2"><img ngf-src="locationImage" alt=""></div>
+                </div>
+                <div layout="row" style="height:50%">
+                  <div class="image-thumbnail" flex="50" ng-repeat="locationImage in newLocation.images" ng-if="$index >=2"><img ngf-src="locationImage" alt=""></div>
                 </div>
               </div>
               <div class="information-input" layout-gt-xs="row">
                 <form name="addLocationForm">
                   <md-input-container class="md-block">
                     <label>Title</label>
-                    <textarea required md-no-asterisk ng-model="newLocation.title" md-maxlength="20" rows="5" md-select-on-focus></textarea>
+                    <textarea md-no-asterisk ng-model="newLocation.title" ng-maxlength="20" rows="5" md-select-on-focus></textarea>
                   </md-input-container>
                   <md-input-container class="md-block">
                     <label>Description</label>
-                    <textarea required md-no-asterisk ng-model="newLocation.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                    <textarea md-no-asterisk ng-model="newLocation.description" ng-maxlength="150" rows="5" md-select-on-focus></textarea>
                   </md-input-container>
                 </form>
               </div>
             </div>
+            <div ng-if="disableImageUpload" class="image-limit">Maximum of 4 images.</div>
           </div>
         </md-dialog-content>
-
         <md-dialog-actions layout="row" class="md-whiteframe-2dp">
           <span flex></span>
           <md-button ng-click="cancel()">
            Cancel
           </md-button>
-          <md-button class="md-primary md-raised" ng-click="add()">
+          <md-button type="submit" class="md-primary md-raised" ng-click="add()">
             Add
           </md-button>
         </md-dialog-actions>

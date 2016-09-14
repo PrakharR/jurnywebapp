@@ -13,6 +13,7 @@
   }
   md-dialog-content {
     margin-bottom: 52px;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     .dialog-map-parent {
       height: 200px;
       width: 100%;
@@ -37,8 +38,9 @@
     .input-row {
       margin-top: 24px;
       .image-input {
+        display: flex !important;
         height: 112px;
-        width: 112px;
+        width: 150px;
         background: $jurny-color;
         cursor: pointer;
         position: relative;
@@ -46,12 +48,29 @@
         background-size: cover;
         background-position: center;
         .icon-circle {
+          position: absolute;
+          top:50%;
+          left:50%;
+          -webkit-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
           width: 36px;
           height: 36px;
           border-radius: 50%;
           background: #fff;
+          transition: all 0.3s cubic-bezier(.25,.8,.25,1);
           md-icon {
             color: $jurny-color;
+          }
+        }
+        .image-thumbnail {
+          overflow: hidden;
+          img {
+            height: 100%;
+          }
+        }
+        &:hover {
+          .icon-circle {
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
           }
         }
       }
@@ -71,6 +90,10 @@
         }
       }
     }
+    .image-limit {
+      font-size: $jy-font-size-small;
+      color: $jurny-warn-color;
+    }
   }
   md-dialog-actions {
     position: absolute;
@@ -78,5 +101,12 @@
     bottom: 0;
     right: 0;
     background: #fff;
+  }
+}
+.md-dialog-container.dragover {
+  .add-location-dialog md-dialog-content {
+    -webkit-box-shadow: inset 0px 0px 0px 2px rgba(76,175,80,0.45);
+    -moz-box-shadow: inset 0px 0px 0px 2px rgba(76,175,80,0.45);
+    box-shadow: inset 0px 0px 0px 2px rgba(76,175,80,0.45);
   }
 }

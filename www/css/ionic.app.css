@@ -10347,6 +10347,7 @@ div.creator-toolbar {
   div.creator-toolbar .locations-parent {
     height: 100%; }
     div.creator-toolbar .locations-parent .location-box {
+      display: block !important;
       height: 36px;
       min-height: 36px;
       width: 36px;
@@ -10410,7 +10411,8 @@ div.creator-toolbar {
   .add-location-dialog md-toolbar .md-toolbar-tools h2 {
     color: #fff; }
   .add-location-dialog md-dialog-content {
-    margin-bottom: 52px; }
+    margin-bottom: 52px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
     .add-location-dialog md-dialog-content .dialog-map-parent {
       height: 200px;
       width: 100%;
@@ -10431,8 +10433,9 @@ div.creator-toolbar {
     .add-location-dialog md-dialog-content .input-row {
       margin-top: 24px; }
       .add-location-dialog md-dialog-content .input-row .image-input {
+        display: flex !important;
         height: 112px;
-        width: 112px;
+        width: 150px;
         background: #4caf50;
         cursor: pointer;
         position: relative;
@@ -10440,12 +10443,24 @@ div.creator-toolbar {
         background-size: cover;
         background-position: center; }
         .add-location-dialog md-dialog-content .input-row .image-input .icon-circle {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
           width: 36px;
           height: 36px;
           border-radius: 50%;
-          background: #fff; }
+          background: #fff;
+          transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
           .add-location-dialog md-dialog-content .input-row .image-input .icon-circle md-icon {
             color: #4caf50; }
+        .add-location-dialog md-dialog-content .input-row .image-input .image-thumbnail {
+          overflow: hidden; }
+          .add-location-dialog md-dialog-content .input-row .image-input .image-thumbnail img {
+            height: 100%; }
+        .add-location-dialog md-dialog-content .input-row .image-input:hover .icon-circle {
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
       .add-location-dialog md-dialog-content .input-row .information-input {
         margin-left: 24px;
         height: 112px; }
@@ -10456,9 +10471,17 @@ div.creator-toolbar {
           height: 96px !important;
           width: 250px;
           line-height: 1.3; }
+    .add-location-dialog md-dialog-content .image-limit {
+      font-size: 0.875em;
+      color: #F44336; }
   .add-location-dialog md-dialog-actions {
     position: absolute;
     left: 0;
     bottom: 0;
     right: 0;
     background: #fff; }
+
+.md-dialog-container.dragover .add-location-dialog md-dialog-content {
+  -webkit-box-shadow: inset 0px 0px 0px 2px rgba(76, 175, 80, 0.45);
+  -moz-box-shadow: inset 0px 0px 0px 2px rgba(76, 175, 80, 0.45);
+  box-shadow: inset 0px 0px 0px 2px rgba(76, 175, 80, 0.45); }

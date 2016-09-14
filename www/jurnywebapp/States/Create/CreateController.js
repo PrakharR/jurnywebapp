@@ -83,12 +83,31 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
     };
     $scope.dialogMap = new google.maps.Map(document.getElementById("dialogMap"), mapOptions);
 
+    $scope.draggedImages = [];
+    $scope.selectedImages = [];
+    $scope.maxFiles = 4;
+    $scope.disableImageUpload = false;
+
+    $scope.imageSelected = function(method) {
+      if(method == 'drag') {
+        $scope.newLocation.images.push.apply($scope.newLocation.images,$scope.draggedImages);
+      } else if(method == 'select') {
+        $scope.newLocation.images.push.apply($scope.newLocation.images,$scope.selectedImages);
+      }
+      $scope.draggedImages = [];
+      $scope.selectedImages = [];
+      $scope.maxFiles = 4 - $scope.newLocation.images.length;
+      if($scope.maxFiles <= 0) {
+        $scope.disableImageUpload = true;
+      }
+    }
+
     $scope.newLocation = {
       title: '',
       description: '',
       lat: addLatLng.lat(),
       lon: addLatLng.lng(),
-      image: ''
+      images: []
     }
 
     $mdDialog.show({
@@ -104,7 +123,10 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
     $scope.newLocation = null;
     $mdDialog.hide();
   };
+
   $scope.add = function() {
+    // Need to reset background image of image adder
+    angular.element(document.querySelector('#locationImageInput')).css('background-image', 'none');
     $scope.tour.locations.push($scope.newLocation);
     $mdDialog.hide();
     console.log($scope.tour);
