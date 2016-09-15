@@ -83,10 +83,11 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
     };
     $scope.dialogMap = new google.maps.Map(document.getElementById("dialogMap"), mapOptions);
 
+    // Handling for image upload
+    // Reference: https://github.com/danialfarid/ng-file-upload
     $scope.draggedImages = [];
     $scope.selectedImages = [];
-    $scope.maxFiles = 4;
-    $scope.disableImageUpload = false;
+    $scope.maxFiles = 18;
 
     $scope.imageSelected = function(method) {
       if(method == 'drag') {
@@ -96,9 +97,9 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
       }
       $scope.draggedImages = [];
       $scope.selectedImages = [];
-      $scope.maxFiles = 4 - $scope.newLocation.images.length;
+      $scope.maxFiles = 18 - $scope.newLocation.images.length;
       if($scope.maxFiles <= 0) {
-        $scope.disableImageUpload = true;
+        // $scope.disableImageUpload = true;
       }
     }
 

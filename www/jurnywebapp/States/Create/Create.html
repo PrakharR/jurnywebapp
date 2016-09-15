@@ -35,9 +35,9 @@
 </md-fab-speed-dial>
 
 <div style="visibility:hidden;">
-  <div class="md-dialog-container" id="addLocationDialog"  ngf-drop="imageSelected('drag')" ng-model="draggedImages" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'" ngf-max-files="maxFiles" ngf-drop-disabled="disableImageUpload">
+  <div class="md-dialog-container" id="addLocationDialog">
     <md-dialog aria-label="Add Location Dialog" class="add-location-dialog">
-      <form name="locationForm" ng-cloak>
+      <form name="locationForm" ng-cloak flex>
         <md-toolbar>
           <div class="md-toolbar-tools">
             <h2>Add Location</h2>
@@ -47,49 +47,59 @@
             </md-button>
           </div>
         </md-toolbar>
-        <md-dialog-content>
-          <div class="md-dialog-content">
-            <div layout="row" class="dialog-map-parent">
-              <div id="dialogMap" data-tap-disabled="true">
-              </div>
-              <div class="location-pin">
-                <img ng-src="img/icons/jurny-location-pin.png" alt="Location Pin"/>
-              </div>
-            </div>
-            <div layout-gt-xs="row" class="input-row">
-              <div layout="column" id="locationImageInput" class="image-input md-whiteframe-2dp" ngf-select="imageSelected('select')" ng-model="selectedImages" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'" ngf-max-files="maxFiles" ngf-select-disabled="disableImageUpload">
-                <div class="icon-circle" layout="row" layout-align="center center" ng-if="newLocation.images.length<=0">
-                  <md-icon class="material-icons">photo_camera</md-icon>
+        <md-dialog-content flex>
+          <md-tabs class="add-location-tabs" md-center-tabs md-border-bottom>
+            <md-tab id="tab1">
+              <md-tab-label>Location Details</md-tab-label>
+              <md-tab-body>
+                <div class="tab-content" layout-gt-xs="row">
+                  <div class="dialog-map-parent" flex-gt-xs="60">
+                    <div id="dialogMap" data-tap-disabled="true">
+                    </div>
+                    <div class="location-pin">
+                      <img ng-src="img/icons/jurny-location-pin.png" alt="Location Pin"/>
+                    </div>
+                  </div>
+                  <div class="input-parent" flex="40" layout="column" layout-align="center start">
+                    <md-input-container class="md-block">
+                      <label>Title</label>
+                      <input type="text" md-no-asterisk ng-model="newLocation.title" ng-maxlength="20">
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                      <label>Description</label>
+                      <textarea md-no-asterisk ng-model="newLocation.description" ng-maxlength="150" rows="5" md-select-on-focus></textarea>
+                    </md-input-container>
+                  </div>
                 </div>
-                <div layout="row" style="height:50%">
-                  <div class="image-thumbnail" flex="50" ng-repeat="locationImage in newLocation.images | limitTo:2"><img ngf-src="locationImage" alt=""></div>
+              </md-tab-body>
+            </md-tab>
+            <md-tab id="tab2">
+              <md-tab-label>Location Media</md-tab-label>
+              <md-tab-body>
+                <div class="tab-content">
+                  <div class="media-drop" ngf-drop="imageSelected('drag')" ng-model="draggedImages" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'" ngf-max-files="maxFiles">
+                    <div class="initial-drop">
+                      <div class="drop-text" ng-if="newLocation.images.length <= 0">Drop images or videos.</div>
+                      <md-button class="md-primary md-raised" ngf-select="imageSelected('select')" ng-model="selectedImages" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'" ngf-max-files="maxFiles">Select Media</md-button>
+                    </div>
+                    <div class="image-grid" ng-if="newLocation.images.length > 0">
+                      <md-grid-list md-cols-xs="2" md-cols-sm="4" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="8px" md-gutter-gt-sm="8px">
+                        <md-grid-tile class="img-thumbnail" md-rowspan="1" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="image in newLocation.images"  ngf-background="image">
+                        </md-grid-tile>
+                      </md-grid-list>
+                    </div>
+                  </div>
                 </div>
-                <div layout="row" style="height:50%">
-                  <div class="image-thumbnail" flex="50" ng-repeat="locationImage in newLocation.images" ng-if="$index >=2"><img ngf-src="locationImage" alt=""></div>
-                </div>
-              </div>
-              <div class="information-input" layout-gt-xs="row">
-                <form name="addLocationForm">
-                  <md-input-container class="md-block">
-                    <label>Title</label>
-                    <textarea md-no-asterisk ng-model="newLocation.title" ng-maxlength="20" rows="5" md-select-on-focus></textarea>
-                  </md-input-container>
-                  <md-input-container class="md-block">
-                    <label>Description</label>
-                    <textarea md-no-asterisk ng-model="newLocation.description" ng-maxlength="150" rows="5" md-select-on-focus></textarea>
-                  </md-input-container>
-                </form>
-              </div>
-            </div>
-            <div ng-if="disableImageUpload" class="image-limit">Maximum of 4 images.</div>
-          </div>
+              </md-tab-body>
+            </md-tab>
+          </md-tabs>
         </md-dialog-content>
         <md-dialog-actions layout="row" class="md-whiteframe-2dp">
           <span flex></span>
           <md-button ng-click="cancel()">
            Cancel
           </md-button>
-          <md-button type="submit" class="md-primary md-raised" ng-click="add()">
+          <md-button type="submit" class="md-primary md-raised" ng-click="add(locationForm.$valid)">
             Add
           </md-button>
         </md-dialog-actions>
@@ -97,3 +107,41 @@
     </md-dialog>
   </div>
 </div>
+
+<md-dialog aria-label="Mango (Fruit)">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Mango (Fruit)</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:800px;max-height:810px; ">
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="one">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">Tab One</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+          </md-content>
+        </md-tab>
+        <md-tab label="two">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">Tab Two</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
+            <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus egestas enim, at convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo. Cras sed nisl consectetur, rhoncus sapien sit amet, tempus sapien.</p>
+            <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+          </md-content>
+        </md-tab>
+        <md-tab label="three">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">Tab Three</h1>
+            <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-dialog-content>
+  </form>
+</md-dialog>
