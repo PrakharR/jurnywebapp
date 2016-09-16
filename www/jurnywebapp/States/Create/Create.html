@@ -10,7 +10,7 @@
       <div class="creator-toolbar" ng-if="tour.locations.length>0">
         <div class="locations-parent" layout="row" layout-align="start center" sv-root sv-part="tour.locations">
           <div flex></div>
-          <div class="location-box md-whiteframe-8dp" ng-repeat="location in tour.locations" ngf-background="location.images[0]" sv-element ng-click="reviewLocation($event,location, $index)">
+          <div class="location-box md-whiteframe-8dp" ng-repeat="location in tour.locations" ngf-background="location.images[0]" sv-element ng-click="reviewLocation($event,location,$index)" ng-mouseenter="showLocationDets($event, location);" ng-mouseleave="hideLocationDets($event);">
             <span ng-if="!location.image">J</span>
             <div class="location-number md-whiteframe-1dp" layout="row" layout-align="center center">{{$index+1}}</div>
           </div>
@@ -64,10 +64,12 @@
                     <md-input-container class="md-block">
                       <label>Title</label>
                       <input type="text" ng-model="newLocation.title" ng-maxlength="20">
+                      <input required type="hidden" ng-model="newLocation.title">
                     </md-input-container>
                     <md-input-container class="md-block" flex>
                       <label>Description</label>
                       <textarea ng-model="newLocation.description" ng-maxlength="150" rows="3" md-select-on-focus></textarea>
+                      <input required type="hidden" ng-model="newLocation.description">
                     </md-input-container>
                   </div>
                 </div>
@@ -108,3 +110,11 @@
     </md-dialog>
   </div>
 </div>
+
+<script type="text/ng-template" id="panel.html">
+  <div class="location-panel" layout="column" layout-align="center center">
+    <div class="panel-title">
+      {{location.title}}
+    </div>
+  </div>
+</script>

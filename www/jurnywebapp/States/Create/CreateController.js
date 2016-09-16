@@ -1,4 +1,4 @@
-createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordovaGeolocation, $mdDialog, $timeout, $window, $q){
+createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordovaGeolocation, $mdDialog, $timeout, $window, $q, $mdPanel){
 
   // Block to check if user is signed in, redirect otherwise
   $scope.goToLogin = function() {
@@ -35,6 +35,9 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
   // Variable to store index of location currently being viewed
   $scope.currentIndex;
 
+  // Stores reference to panel so that it can be closed outside of panel controller
+  $scope.panelRef;
+
   // Google places search callback
   $scope.location;
   $scope.locationSelectedFromSearch = function(location) {
@@ -68,6 +71,17 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
   $scope.reviewLocation = function(ev,location,index) {
     $scope.launchCreateLocationDialog(ev,location);
     $scope.currentIndex = index;
+  }
+
+  var createPinOnMap = function(location) {
+    var myLatLng = new google.maps.LatLng(location.lat,location.lon);
+
+    var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: $scope.map,
+      title: location.title,
+      icon: 'img/icons/jurny-location-pin.png'
+    });
   }
 
   $scope.launchCreateLocationDialog = function(ev,location) {
@@ -144,12 +158,50 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
     $mdDialog.hide();
   };
 
-  $scope.add = function() {
-    if($scope.isReview) {
-      $scope.tour.locations.splice($scope.currentIndex, 1, $scope.newLocation);
-    } else {
-      $scope.tour.locations.push($scope.newLocation);
+  $scope.add = function(valid) {
+    if(valid){
+      if($scope.isReview) {
+        $scope.tour.locations.splice($scope.currentIndex, 1, $scope.newLocation);
+      } else {
+        $scope.tour.locations.push($scope.newLocation);
+        createPinOnMap($scope.newLocation);
+      }
+      $mdDialog.hide();
     }
-    $mdDialog.hide();
   }
+
+  $scope.showLocationDets = function(ev,location) {
+    var callback = function(mdPanelRef) {
+      $scope.panelRef = mdPanelRef;
+    }
+    var position = $mdPanel.newPanelPosition()
+        .relativeTo(ev.target)
+        .addPanelPosition($mdPanel.xPosition.CENTER, $mdPanel.yPosition.ABOVE)
+        .withOffsetY('-16px');
+
+    var config = {
+      attachTo: angular.element(document.body),
+      controller: function(mdPanelRef, $scope) {
+        callback(mdPanelRef);
+        $scope.location = location;
+        $scope.goToLocation = function() {
+          console.log($scope.location);
+        };
+      },
+      templateUrl: 'panel.html',
+      position: position,
+      openFrom: ev,
+      escapeToClose: true,
+      focusOnOpen: false,
+      zIndex: 2,
+      propagateContainerEvents: true
+    };
+
+    $mdPanel.open(config);
+  };
+
+  $scope.hideLocationDets = function(ev) {
+    $scope.panelRef.close();
+  }
+
 });
