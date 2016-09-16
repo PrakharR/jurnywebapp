@@ -38,6 +38,9 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
   // Stores reference to panel so that it can be closed outside of panel controller
   $scope.panelRef;
 
+  // Stores the array of markers on the map
+  var mapMarkers = [];
+
   // Google places search callback
   $scope.location;
   $scope.locationSelectedFromSearch = function(location) {
@@ -82,6 +85,12 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
       title: location.title,
       icon: 'img/icons/jurny-location-pin.png'
     });
+
+    mapMarkers.push(marker);
+  }
+
+  var removePinOnMap = function(index) {
+    mapMarkers[index].setMap(null);
   }
 
   $scope.launchCreateLocationDialog = function(ev,location) {
@@ -157,6 +166,12 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
     $scope.newLocation = null;
     $mdDialog.hide();
   };
+
+  $scope.delete = function() {
+    $scope.tour.locations.splice($scope.currentIndex, 1);
+    removePinOnMap($scope.currentIndex);
+    $mdDialog.hide();
+  }
 
   $scope.add = function(valid) {
     if(valid){

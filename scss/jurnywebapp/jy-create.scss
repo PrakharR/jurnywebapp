@@ -16,6 +16,7 @@ div.map-parent {
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
     padding-bottom: 40px;
+    pointer-events: none;
     img {
       width: 40px;
       height: 40px;
@@ -36,6 +37,7 @@ div.creator-toolbar {
   height: 51px;
   background-color: #fff;
   overflow-x: auto;
+  border-top: 1px solid #e8e8e8;
   &.hidden {
     display: none;
   }

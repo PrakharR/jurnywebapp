@@ -1,5 +1,5 @@
 <ion-view>
-    <ion-content>
+    <ion-content has-bouncing="false">
       <jy-navigation map="true"></jy-navigation>
       <div class="map-parent" ng-class="tour.locations.length>0?'location-created':''">
         <div id="map" data-tap-disabled="true"></div>
@@ -36,7 +36,7 @@
 <div style="visibility:hidden;">
   <div class="md-dialog-container" id="addLocationDialog">
     <md-dialog aria-label="Add Location Dialog" class="add-location-dialog">
-      <form name="locationForm" ng-cloak flex>
+      <form name="locationForm" ng-cloak flex autocomplete="off">
         <md-toolbar>
           <div class="md-toolbar-tools">
             <h2 ng-if="!isReview">Add Location</h2>
@@ -50,7 +50,7 @@
         <md-dialog-content flex>
           <md-tabs class="add-location-tabs" md-center-tabs md-border-bottom md-selected="selectedTabIndex">
             <md-tab id="tab1">
-              <md-tab-label>Location Details</md-tab-label>
+              <md-tab-label>Details</md-tab-label>
               <md-tab-body>
                 <div class="tab-content" layout-gt-xs="row">
                   <div class="dialog-map-parent" flex-gt-xs="60">
@@ -76,7 +76,7 @@
               </md-tab-body>
             </md-tab>
             <md-tab id="tab2">
-              <md-tab-label>Location Media</md-tab-label>
+              <md-tab-label>Media</md-tab-label>
               <md-tab-body>
                 <div class="tab-content">
                   <div class="media-drop" ngf-drop="imageSelected('drag')" ng-model="draggedImages" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'" ngf-max-files="maxFiles" sv-root>
@@ -98,8 +98,8 @@
         </md-dialog-content>
         <md-dialog-actions layout="row" class="md-whiteframe-2dp">
           <span flex></span>
-          <md-button ng-click="cancel()">
-           Cancel
+          <md-button ng-click="delete()" ng-if="isReview">
+           Delete
           </md-button>
           <md-button type="submit" class="md-primary md-raised" ng-click="add(locationForm.$valid)">
             <span ng-if="!isReview">Add</span>
