@@ -32,10 +32,12 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
     locations: []
   }
 
+  // Variable to store index of location currently being viewed
+  $scope.currentIndex;
+
   // Google places search callback
   $scope.location;
   $scope.locationSelectedFromSearch = function(location) {
-    console.log(location);
     centerMapOnLatLng(location.latitude,location.longitude);
   }
 
@@ -63,9 +65,29 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
     $scope.map.setCenter({lat: lat, lng: lng});
   }
 
-  $scope.launchCreateLocationDialog = function(ev) {
+  $scope.reviewLocation = function(ev,location,index) {
+    $scope.launchCreateLocationDialog(ev,location);
+    $scope.currentIndex = index;
+  }
+
+  $scope.launchCreateLocationDialog = function(ev,location) {
     var parentEl = angular.element(document.body);
-    var addLatLng = $scope.map.getCenter();
+    var addLatLng;
+    if(location) {
+      addLatLng = new google.maps.LatLng(location.lat,location.lon);
+      $scope.newLocation = location;
+      $scope.isReview = true;
+    }else {
+      addLatLng = $scope.map.getCenter();
+      $scope.newLocation = {
+        title: '',
+        description: '',
+        lat: addLatLng.lat(),
+        lon: addLatLng.lng(),
+        images: []
+      }
+      $scope.isReview = false;
+    }
     var mapOptions = {
       center: addLatLng,
       zoom: 18,
@@ -103,22 +125,19 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
       }
     }
 
-    $scope.newLocation = {
-      title: '',
-      description: '',
-      lat: addLatLng.lat(),
-      lon: addLatLng.lng(),
-      images: []
-    }
-
     $mdDialog.show({
       contentElement: '#addLocationDialog',
       parent: parentEl,
       targetEvent: ev,
       clickOutsideToClose:true,
-      fullscreen: true
+      fullscreen: true,
+      onRemoving: $scope.dialogClosing
     });
   };
+
+  $scope.dialogClosing = function() {
+    $scope.selectedTabIndex = 0;
+  }
 
   $scope.cancel = function() {
     $scope.newLocation = null;
@@ -126,10 +145,11 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
   };
 
   $scope.add = function() {
-    // Need to reset background image of image adder
-    angular.element(document.querySelector('#locationImageInput')).css('background-image', 'none');
-    $scope.tour.locations.push($scope.newLocation);
+    if($scope.isReview) {
+      $scope.tour.locations.splice($scope.currentIndex, 1, $scope.newLocation);
+    } else {
+      $scope.tour.locations.push($scope.newLocation);
+    }
     $mdDialog.hide();
-    console.log($scope.tour);
   }
 });

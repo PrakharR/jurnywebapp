@@ -73,14 +73,17 @@ div.creator-toolbar {
         top:-6px;
         left:-6px;
       }
+      &:focus {
+        outline: 0;
+      }
     }
   }
 }
 
 .add-location-fab {
   position: absolute;
-  top: 87px;
-  left: 423px;
+  top: 72px;
+  left: 308px;
   z-index: 1;
   margin: 0;
   height: 48px;
@@ -92,11 +95,11 @@ div.creator-toolbar {
 
 .maps-search {
   position: absolute;
-  top: 87px;
-  left: 23px;
+  top: 72px;
+  left: 8px;
   z-index: 1;
   md-autocomplete {
-    width: 400px;
+    width: 300px;
     height: 48px;
     md-autocomplete-wrap {
       height: 48px;

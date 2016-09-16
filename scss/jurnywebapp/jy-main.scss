@@ -93,10 +93,13 @@ md-input-container {
     height: 100%;
     img {
       width: 56px;
+      min-width: 56px;
       height: 56px;
       border-radius: 50%;
       -webkit-border-radius: 50%;
       margin: 16px;
+      // margin: 0;
+      padding: 0;
     }
     .email {
       margin-top: 24px;

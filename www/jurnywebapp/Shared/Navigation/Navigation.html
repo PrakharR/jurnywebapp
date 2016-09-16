@@ -1,4 +1,4 @@
-<md-toolbar layout="row" class="navigation-bar md-whiteframe-2dp" ng-if="!map">
+<md-toolbar layout="row" class="navigation-bar" ng-if="!map">
   <div class="md-toolbar-tools">
     <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleSidenav()">
       <md-icon>menu</md-icon>
@@ -20,7 +20,7 @@
       <md-menu-content width="5" class="user-avatar-menu-content">
         <md-menu-item>
           <img ng-src="{{user.picture}}" alt="User profile picture">
-          <div layout="column">
+          <div layout="column" style="margin:0;padding:0;">
             <p class="email">{{user.email}}</p>
             <p class="sign-out"><a ng-click="signOut()">SIGN OUT</a></p>
           </div>
@@ -50,7 +50,7 @@
         <md-menu-item>
 
             <img ng-src="{{user.picture}}" alt="User profile picture">
-            <div layout="column">
+            <div layout="column" style="margin:0;padding:0;">
               <p class="email">{{user.email}}</p>
               <p class="sign-out"><a ng-click="signOut()">SIGN OUT</a></p>
             </div>
