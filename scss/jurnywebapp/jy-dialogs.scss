@@ -33,8 +33,9 @@
         color: $jurny-color;
       }
     }
+
     .dialog-map-parent {
-      height: 100%;
+      width: 100%;
       position: relative;
       #dialogMap {
         width: 100%;
@@ -59,12 +60,20 @@
     }
 
     .input-parent {
-      padding-left: 16px;
       md-input-container {
-        width: 100%;
+        .md-resize-wrapper {
+          height: 100%;
+        }
+        label {
+          font-size: $jy-font-size-lx;
+        }
         input {
           font-size: $jy-font-size-lx;
         }
+      }
+      textarea {
+        height: 100% !important;
+        overflow-y: auto;
       }
     }
 

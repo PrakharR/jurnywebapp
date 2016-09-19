@@ -22,7 +22,7 @@
     transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
   .login-btn.facebook {
-    background-color: $facebook-color;
+    background-color: $facebook-color !important;
     opacity: 0.9;
     span {
       color: #fff;
@@ -33,7 +33,7 @@
     opacity: 1;
   }
   .login-btn.google {
-    background-color: $google-color;
+    background-color: $google-color !important;
     opacity: 0.9;
     span {
       color: #fff;

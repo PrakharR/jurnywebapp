@@ -54,14 +54,7 @@
               <md-tab-label>Details</md-tab-label>
               <md-tab-body>
                 <div class="tab-content" layout-gt-xs="row">
-                  <div class="dialog-map-parent" flex-gt-xs="60">
-                    <div id="dialogMap" data-tap-disabled="true">
-                    </div>
-                    <div class="location-pin">
-                      <img ng-src="img/icons/jurny-location-pin.png" alt="Location Pin"/>
-                    </div>
-                  </div>
-                  <div class="input-parent" flex="40" layout="column">
+                  <div layout="column" class="input-parent" flex-gt-xs="50" style="padding-right: 16px;">
                     <md-input-container class="md-block">
                       <label>Title</label>
                       <input type="text" ng-model="newLocation.title" ng-maxlength="30">
@@ -69,9 +62,16 @@
                     </md-input-container>
                     <md-input-container class="md-block" flex>
                       <label>Description</label>
-                      <textarea ng-model="newLocation.description" ng-maxlength="200" rows="3" md-select-on-focus></textarea>
+                      <textarea ng-model="newLocation.description" ng-maxlength="400" rows="3" md-select-on-focus></textarea>
                       <input required type="hidden" ng-model="newLocation.description">
                     </md-input-container>
+                  </div>
+                  <div class="dialog-map-parent" flex-gt-xs="50">
+                    <div id="dialogMap" data-tap-disabled="true">
+                    </div>
+                    <div class="location-pin">
+                      <img ng-src="img/icons/jurny-location-pin.png" alt="Location Pin"/>
+                    </div>
                   </div>
                 </div>
               </md-tab-body>
@@ -131,11 +131,11 @@
               <md-tab-label>Details</md-tab-label>
               <md-tab-body>
                 <div class="tab-content" layout-gt-xs="row">
-                  <div class="dialog-map-parent" flex-gt-xs="60">
+                  <div class="dialog-map-parent" flex-gt-xs="50">
                     <div id="finalizeDialogMap" data-tap-disabled="true">
                     </div>
                   </div>
-                  <div class="input-parent" flex="40" layout="column">
+                  <div class="input-parent" flex="50" layout="column" style="padding-left: 16px;">
                     <md-input-container class="md-block">
                       <label>Tour Title</label>
                       <input type="text" ng-model="tour.title" ng-maxlength="20">

@@ -8915,7 +8915,7 @@ md-input-container {
     -webkit-transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
   .login-card .login-btn.facebook {
-    background-color: #3c5c99;
+    background-color: #3c5c99 !important;
     opacity: 0.9; }
     .login-card .login-btn.facebook span {
       color: #fff; }
@@ -8923,7 +8923,7 @@ md-input-container {
     background-color: #3c5c99;
     opacity: 1; }
   .login-card .login-btn.google {
-    background-color: #d73d32;
+    background-color: #d73d32 !important;
     opacity: 0.9; }
     .login-card .login-btn.google span {
       color: #fff; }
@@ -9071,7 +9071,7 @@ div.creator-toolbar {
     .add-location-dialog md-dialog-content .add-location-tabs md-tabs-canvas md-pagination-wrapper md-tab-item.md-active span {
       color: #4caf50; }
     .add-location-dialog md-dialog-content .dialog-map-parent {
-      height: 100%;
+      width: 100%;
       position: relative; }
       .add-location-dialog md-dialog-content .dialog-map-parent #dialogMap {
         width: 100%;
@@ -9089,12 +9089,15 @@ div.creator-toolbar {
         .add-location-dialog md-dialog-content .dialog-map-parent .location-pin img {
           width: 40px;
           height: 40px; }
-    .add-location-dialog md-dialog-content .input-parent {
-      padding-left: 16px; }
-      .add-location-dialog md-dialog-content .input-parent md-input-container {
-        width: 100%; }
-        .add-location-dialog md-dialog-content .input-parent md-input-container input {
-          font-size: 1.25em; }
+    .add-location-dialog md-dialog-content .input-parent md-input-container .md-resize-wrapper {
+      height: 100%; }
+    .add-location-dialog md-dialog-content .input-parent md-input-container label {
+      font-size: 1.25em; }
+    .add-location-dialog md-dialog-content .input-parent md-input-container input {
+      font-size: 1.25em; }
+    .add-location-dialog md-dialog-content .input-parent textarea {
+      height: 100% !important;
+      overflow-y: auto; }
     .add-location-dialog md-dialog-content .media-drop {
       height: 100%;
       background: rgba(238, 238, 238, 0.45);
