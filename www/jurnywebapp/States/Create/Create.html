@@ -18,6 +18,7 @@
         </div>
       </div>
       <md-button class="md-whiteframe-z1 add-location-fab" ng-click="launchCreateLocationDialog($event)">Add Location</md-button>
+      <md-button class="md-whiteframe-z1 create-tour-fab" ng-click="finalizeTour($event)" ng-if="tour.locations.length > 1">Create Tour</md-button>
       <place-autocomplete class="maps-search" callback="locationSelectedFromSearch"></place-autocomplete>
       <!-- <div ng-if="location.name">
         <h4>Selected location</h4>
@@ -63,12 +64,12 @@
                   <div class="input-parent" flex="40" layout="column">
                     <md-input-container class="md-block">
                       <label>Title</label>
-                      <input type="text" ng-model="newLocation.title" ng-maxlength="20">
+                      <input type="text" ng-model="newLocation.title" ng-maxlength="30">
                       <input required type="hidden" ng-model="newLocation.title">
                     </md-input-container>
                     <md-input-container class="md-block" flex>
                       <label>Description</label>
-                      <textarea ng-model="newLocation.description" ng-maxlength="150" rows="3" md-select-on-focus></textarea>
+                      <textarea ng-model="newLocation.description" ng-maxlength="200" rows="3" md-select-on-focus></textarea>
                       <input required type="hidden" ng-model="newLocation.description">
                     </md-input-container>
                   </div>
@@ -104,6 +105,76 @@
           <md-button type="submit" class="md-primary md-raised" ng-click="add(locationForm.$valid)">
             <span ng-if="!isReview">Add</span>
             <span ng-if="isReview">Save</span>
+          </md-button>
+        </md-dialog-actions>
+      </form>
+    </md-dialog>
+  </div>
+</div>
+
+<div style="visibility:hidden;">
+  <div class="md-dialog-container" id="finalizeTourDialog">
+    <md-dialog aria-label="Add Location Dialog" class="add-location-dialog">
+      <form name="locationForm" ng-cloak flex autocomplete="off">
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h2>Finalize Tour</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+              <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+            </md-button>
+          </div>
+        </md-toolbar>
+        <md-dialog-content flex>
+          <md-tabs class="add-location-tabs" md-center-tabs md-border-bottom md-selected="selectedTabIndex">
+            <md-tab id="tab1">
+              <md-tab-label>Details</md-tab-label>
+              <md-tab-body>
+                <div class="tab-content" layout-gt-xs="row">
+                  <div class="dialog-map-parent" flex-gt-xs="60">
+                    <div id="finalizeDialogMap" data-tap-disabled="true">
+                    </div>
+                  </div>
+                  <div class="input-parent" flex="40" layout="column">
+                    <md-input-container class="md-block">
+                      <label>Tour Title</label>
+                      <input type="text" ng-model="tour.title" ng-maxlength="20">
+                      <input required type="hidden" ng-model="newLocation.title">
+                    </md-input-container>
+                    <md-input-container class="md-block" flex>
+                      <label>Tour Description</label>
+                      <textarea ng-model="tour.description" ng-maxlength="150" rows="3" md-select-on-focus></textarea>
+                      <input required type="hidden" ng-model="newLocation.description">
+                    </md-input-container>
+                  </div>
+                </div>
+              </md-tab-body>
+            </md-tab>
+            <md-tab id="tab2">
+              <md-tab-label>Locations</md-tab-label>
+              <md-tab-body>
+                <div class="tab-content">
+                  <div class="media-drop" ngf-drop="imageSelected('drag')" ng-model="draggedImages" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'" ngf-max-files="maxFiles" sv-root>
+                    <div class="initial-drop">
+                      <div class="drop-text" ng-if="newLocation.images.length <= 0">Drop images or videos.</div>
+                      <md-button class="md-primary md-raised" ngf-select="imageSelected('select')" ng-model="selectedImages" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'" ngf-max-files="maxFiles">Select Media</md-button>
+                    </div>
+                    <div class="image-grid" ng-if="newLocation.images.length > 0" sv-part="newLocation.images">
+                      <md-grid-list md-cols-xs="2" md-cols-sm="4" md-cols-md="5" md-cols-gt-md="5" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="8px" md-gutter-gt-sm="8px">
+                          <md-grid-tile class="img-thumbnail" md-rowspan="1" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="image in newLocation.images"  ngf-background="image" ngf-resize="{width: 400}" sv-element="opts">
+                          </md-grid-tile>
+                      </md-grid-list>
+                    </div>
+                  </div>
+                </div>
+              </md-tab-body>
+            </md-tab>
+          </md-tabs>
+        </md-dialog-content>
+        <md-dialog-actions layout="row" class="md-whiteframe-2dp">
+          <span flex></span>
+          <md-button type="submit" class="md-primary md-raised" ng-click="finalizeTourConfirmed()">
+            <span>Confirm</span>
           </md-button>
         </md-dialog-actions>
       </form>

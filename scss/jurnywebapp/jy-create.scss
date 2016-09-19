@@ -95,6 +95,19 @@ div.creator-toolbar {
   }
 }
 
+.create-tour-fab {
+  position: absolute;
+  top: 72px;
+  left: 420px;
+  z-index: 1;
+  margin: 0;
+  height: 48px;
+  background-color: $jurny-color !important;
+  span {
+    color: #fff;
+  }
+}
+
 .maps-search {
   position: absolute;
   top: 72px;

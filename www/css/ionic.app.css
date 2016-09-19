@@ -9022,6 +9022,17 @@ div.creator-toolbar {
   .add-location-fab span {
     color: #4caf50; }
 
+.create-tour-fab {
+  position: absolute;
+  top: 72px;
+  left: 420px;
+  z-index: 1;
+  margin: 0;
+  height: 48px;
+  background-color: #4caf50 !important; }
+  .create-tour-fab span {
+    color: #fff; }
+
 .maps-search {
   position: absolute;
   top: 72px;
@@ -9063,6 +9074,9 @@ div.creator-toolbar {
       height: 100%;
       position: relative; }
       .add-location-dialog md-dialog-content .dialog-map-parent #dialogMap {
+        width: 100%;
+        height: 100%; }
+      .add-location-dialog md-dialog-content .dialog-map-parent #finalizeDialogMap {
         width: 100%;
         height: 100%; }
       .add-location-dialog md-dialog-content .dialog-map-parent .location-pin {

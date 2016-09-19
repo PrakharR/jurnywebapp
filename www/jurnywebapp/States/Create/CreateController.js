@@ -219,4 +219,110 @@ createModule.controller('createCtrl',function($scope, $rootScope, $state, $cordo
     $scope.panelRef.close();
   }
 
+  $scope.finalizeTour = function(ev) {
+    var addLatLng = new google.maps.LatLng($scope.tour.locations[0].lat,$scope.tour.locations[0].lon);
+    var mapOptions = {
+      center: addLatLng,
+      zoom: 18,
+      MapTypeControlOptions: {
+        mapTypeIds: []
+      },
+      disableDefaultUI: true,
+      draggable: false,
+      scrollwheel: false,
+      disableDoubleClickZoom: true,
+      mapTypeControl: false,
+      scaleControl: false,
+      zoomControl: false,
+      clickableIcons: false
+    };
+    $scope.finalizeDialogMap = new google.maps.Map(document.getElementById("finalizeDialogMap"), mapOptions);
+    var bounds = new google.maps.LatLngBounds();
+
+    for (var i=0; i<$scope.tour.locations.length;i++) {
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng($scope.tour.locations[i].lat, $scope.tour.locations[i].lon),
+        map: $scope.finalizeDialogMap,
+        icon: 'img/icons/jurny-location-pin.png'
+      });
+      bounds.extend(marker.position);
+    }
+
+    $scope.finalizeDialogMap.fitBounds(bounds);
+
+    var parentEl = angular.element(document.body);
+    $mdDialog.show({
+      contentElement: '#finalizeTourDialog',
+      parent: parentEl,
+      targetEvent: ev,
+      clickOutsideToClose:true,
+      fullscreen: true,
+      onRemoving: $scope.dialogClosing
+    });
+  }
+
+  $scope.finalizeTourConfirmed = function() {
+    // createTour();
+  }
+
+  var createTour = function() {
+    var locationsToSave = [];
+    // Get a key for a new Tour.
+    var newTourKey = firebase.database().ref().child('tours').push().key;
+    var storageRef = firebase.storage().ref();
+
+    var uploadTour = function() {
+      var tourToSave = {
+        title: $scope.tour.title,
+        description: $scope.tour.description,
+        locations: locationsToSave
+      }
+      console.log(tourToSave);
+      firebase.database().ref('tours/' + newTourKey).set(tourToSave, function(response) {
+        console.log('tour saved!');
+      });
+    }
+    var first = 0;
+    var second = 0;
+    for (var i=0; i<$scope.tour.locations.length; i++) {
+      locationsToSave[i] = {
+        title: $scope.tour.locations[i].title,
+        description: $scope.tour.locations[i].description,
+        lat: $scope.tour.locations[i].lat,
+        lon: $scope.tour.locations[i].lon
+      };
+      var imageCount = 0;
+      for (var j=0; j<$scope.tour.locations[i].images.length; j++) {
+        first++;
+        imageCount++;
+        locationsToSave[i].imageCount = imageCount;
+        var file = $scope.tour.locations[i].images[j];
+        var locationUploadTask = storageRef.child('tours/' + newTourKey + '/locations/' + i + '/' + j + '.png').put(file);
+        console.log(locationUploadTask.snapshot.downloadURL);
+        locationUploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot) {
+
+        }, function(error) {
+          console.log('location ' + i + 'image ' + j + ' has error');
+          console.log(error.code);
+          switch (error.code) {
+            case 'storage/unauthorized':
+              // User doesn't have permission to access the object
+              break;
+            case 'storage/canceled':
+              // User canceled the upload
+              break;
+            case 'storage/unknown':
+              // Unknown error occurred, inspect error.serverResponse
+              break;
+          }
+        }, function() {
+          second++;
+          console.log(locationUploadTask.snapshot.downloadURL);
+          if (first == second) {
+            uploadTour();
+          }
+        });
+      }
+    }
+  }
 });
